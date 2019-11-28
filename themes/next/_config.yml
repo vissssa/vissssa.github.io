@@ -40,10 +40,11 @@ custom_file_path:
 # ---------------------------------------------------------------
 
 favicon:
-  small: /images/favicon-16x16-next.png
-  medium: /images/favicon-32x32-next.png
-  apple_touch_icon: /images/apple-touch-icon-next.png
-  safari_pinned_tab: /images/logo.svg
+  small: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/favicon.ico
+  medium: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/favicon.ico
+  apple_touch_icon: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/favicon.ico
+  safari_pinned_tab: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/favicon.ico
+
   #android_manifest: /images/manifest.json
   #ms_browserconfig: /images/browserconfig.xml
 
@@ -62,7 +63,7 @@ footer:
     color: "#808080"
 
   # If not defined, `author` from Hexo `_config.yml` will be used.
-  copyright:
+  copyright: vissssa@club
 
   powered:
     # Hexo link (Powered by Hexo).
@@ -104,10 +105,10 @@ creative_commons:
 # ---------------------------------------------------------------
 
 # Schemes
-scheme: Muse
+# scheme: Muse
 #scheme: Mist
 #scheme: Pisces
-#scheme: Gemini
+scheme: Gemini
 
 
 # ---------------------------------------------------------------
@@ -120,14 +121,14 @@ scheme: Muse
 # When running the site in a subdirectory (e.g. yoursite.com/blog), remove the leading slash from link value (/archives -> archives).
 # External url should start with http:// or https://
 menu:
-  home: / || home
-  #about: /about/ || user
-  #tags: /tags/ || tags
-  #categories: /categories/ || th
-  archives: /archives/ || archive
+  home: /|| home
+  about: /about/|| user
+  tags: /tags/|| tags
+  categories: /categories/|| th
+  archives: /archives/|| archive
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
-  #commonweal: /404/ || heartbeat
+  commonweal: /404/|| heartbeat
 
 # Enable / Disable menu icons / item badges.
 menu_settings:
@@ -165,11 +166,11 @@ sidebar:
 # Sidebar Avatar
 avatar:
   # Replace the default image and set the url here.
-  url: #/images/avatar.gif
+  url: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/74347936_p0_master1200.jpg
   # If true, the avatar will be dispalyed in circle.
-  rounded: false
+  rounded: true
   # If true, the avatar will be rotated with the cursor.
-  rotated: false
+  rotated: true
 
 # Posts / Categories / Tags in sidebar.
 site_state: true
@@ -179,6 +180,9 @@ site_state: true
 # Key is the link label showing to end users.
 # Value before `||` delimiter is the target permalink, value after `||` delimiter is the name of Font Awesome icon.
 social:
+  GitHub: https://github.com/vissssa || github
+  E-Mail: mailto:zhangyu18223@gmail || envelope
+  Weibo: https://weibo.com/vissssa || weibo
   #GitHub: https://github.com/yourname || github
   #E-Mail: mailto:yourname@gmail.com || envelope
   #Weibo: https://weibo.com/yourname || weibo
@@ -350,28 +354,33 @@ safari_rainbow: false
 custom_logo: #/uploads/custom-logo.jpg
 
 codeblock:
+  highlight_theme: night bright
+  copy_button:
+    enable: true
+    show_result: true
+    style: mac
   # Code Highlight theme
   # Available values: normal | night | night eighties | night blue | night bright | solarized | solarized dark | galactic
   # See: https://github.com/chriskempson/tomorrow-theme
-  highlight_theme: normal
-  # Add copy button on codeblock
-  copy_button:
-    enable: false
-    # Show text copy result.
-    show_result: false
-    # Available values: default | flat | mac
-    style:
+  # highlight_theme: normal
+  # # Add copy button on codeblock
+  # copy_button:
+  #   enable: false
+  #   # Show text copy result.
+  #   show_result: false
+  #   # Available values: default | flat | mac
+  #   style:
 
 back2top:
   enable: true
   # Back to top in sidebar.
   sidebar: false
   # Scroll percent label in b2t button.
-  scrollpercent: false
+  scrollpercent: true
 
 # Reading progress bar
 reading_progress:
-  enable: false
+  enable: true
   # Available values: top | bottom
   position: top
   color: "#37c6c0"
@@ -388,8 +397,8 @@ bookmark:
 
 # `Follow me on GitHub` banner in the top-right corner.
 github_banner:
-  enable: false
-  permalink: https://github.com/yourname
+  enable: true
+  permalink: https://github.com/vissssa
   title: Follow me on GitHub
 
 
@@ -407,43 +416,36 @@ github_banner:
 # ---------------------------------------------------------------
 
 font:
-  enable: false
+  enable: true
 
-  # Uri of fonts host, e.g. //fonts.googleapis.com (Default).
+  # 外链字体库地址，例如 //fonts.googleapis.com (默认值)
   host:
 
-  # Font options:
-  # `external: true` will load this font family from `host` above.
-  # `family: Times New Roman`. Without any quotes.
-  # `size: x.x`. Use `em` as unit. Default: 1 (16px)
-
-  # Global font settings used for all elements inside <body>.
+  # 全局字体，应用在 body 元素上
   global:
     external: true
-    family: Lato
-    size:
+    family: Monda
 
-  # Font settings for site title (.site-title).
-  title:
-    external: true
-    family:
-    size:
-
-  # Font settings for headlines (<h1> to <h6>).
+  # 标题字体 (h1, h2, h3, h4, h5, h6)
   headings:
     external: true
-    family:
-    size:
+    family: Roboto Slab
 
-  # Font settings for posts (.post-body).
+  # 文章字体
   posts:
     external: true
     family:
 
-  # Font settings for <code> and code blocks.
+  # Logo 字体
+  logo:
+    external: true
+    family: Lobster Two
+    size: 24
+
+  # 代码字体，应用于 code 以及代码块
   codes:
     external: true
-    family:
+    family: PT Mono
 
 
 # ---------------------------------------------------------------
@@ -535,7 +537,7 @@ lazyload: false
 
 # Pangu Support
 # For more information: https://github.com/vinta/pangu.js
-pangu: false
+pangu: true
 
 # Quicklink Support
 # For more information: https://github.com/GoogleChromeLabs/quicklink
@@ -858,8 +860,8 @@ pace:
 # JavaScript 3D library.
 # Dependencies: https://github.com/theme-next/theme-next-three
 three:
-  enable: false
-  three_waves: false
+  enable: true
+  three_waves: true
   canvas_lines: false
   canvas_sphere: false
 
