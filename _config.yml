@@ -4,8 +4,8 @@
 
 # Site
 title: vissssa
-subtitle: '我的一些笔记，未来可能还会写一写人生感悟、读后感、开箱评测等'
-description: '我的一些笔记，未来可能还会写一写人生感悟、读后感、开箱评测等'
+subtitle: '我的一些笔记，人生感悟、读后感、开箱评测等'
+description: '我的一些笔记，人生感悟、读后感、开箱评测等'
 keywords: "python，flask, linux, 微服务，架构"
 author: vissssa
 language: zh-CN
