@@ -797,6 +797,11 @@ vendors:
   # https://github.com/revir/need-more-share2
   needMoreShare2:
 
+github_banner:
+  enable: true
+  permalink: https://github.com/vissssa
+  title: vissssa GitHub
+
 
 # Assets
 css: css
