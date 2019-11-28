@@ -99,8 +99,8 @@ menu:
   home: / || home
   about: /about/ || user
   tags: /tags || tags
-  categories: /categories || categories
-  archives: /archives || archives
+  categories: /categories || th
+  archives: /archives || archive
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
@@ -187,8 +187,8 @@ sidebar:
   #  - always  expand for all pages automatically
   #  - hide    expand only when click on the sidebar toggle icon.
   #  - remove  Totally remove sidebar including sidebar toggle.
-  display: post
-  #display: always
+  # display: post
+  display: always
   #display: hide
   #display: remove
 
@@ -282,7 +282,7 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: night
+highlight_theme: normal
 
 
 # ---------------------------------------------------------------
@@ -341,7 +341,7 @@ mathjax:
   cdn: //cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML
 
 # Han Support docs: https://hanzi.pro/
-han: false
+han: true
 
 # Swiftype Search API Key
 #swiftype_key:
