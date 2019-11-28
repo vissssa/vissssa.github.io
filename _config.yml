@@ -5,8 +5,8 @@
 # Site
 title: vissssa
 subtitle: '我的一些笔记，人生感悟、读后感、开箱评测等'
-description: '我的一些笔记，人生感悟、读后感、开箱评测等'
-keywords: "python，flask, linux, 微服务，架构"
+description: 'python, flask, linux, 架构, 生活, 科技'
+keywords: "python, flask, linux, 架构, 生活, 科技"
 author: vissssa
 language: zh-CN
 timezone: 'Asia/Shanghai'
