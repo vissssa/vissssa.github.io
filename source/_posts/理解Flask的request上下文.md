@@ -1,12 +1,14 @@
 ---
-title: 理解Flask的request上下文
+title: Flask浅析-request上下文
 tags:
   - python
   - flask
   - request
+  - deep
 categories:
-  - web
+  - Flask
 date: 2019-5-15
+description: Flask浅析系列
 ---
 # 理解Flask的request上下文
 

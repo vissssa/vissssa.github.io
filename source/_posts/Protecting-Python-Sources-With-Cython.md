@@ -5,6 +5,7 @@ tags:
 categories:
   - deep
 date: 2019-5-15
+description: 用来加密代码使用
 ---
 
 Protecting your Python sources from unwanted readers is easier said than done, because **.pyc** bytecode is [decompileable](https://github.com/rocky/python-uncompyle6) and the obfuscation is easily reverse-engineered. It took me a while to figure out a proper way to hide Python code…

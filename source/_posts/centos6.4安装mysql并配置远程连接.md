@@ -7,6 +7,7 @@ tags:
 categories:
   - env
 date: 2019-5-15
+description: 运维方面经验
 ---
 #### 一、查看并卸载老的mysql
 1. 查看该操作系统上是否已经安装了mysql数据库

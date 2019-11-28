@@ -5,6 +5,7 @@ tags:
 categories:
   - artifact
 date: 2019-5-15
+description: python的单元测试
 ---
 国际惯例，先上官方文档: [pytest](https://docs.pytest.org/en/stable/contents.html)
 

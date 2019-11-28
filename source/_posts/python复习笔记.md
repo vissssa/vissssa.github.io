@@ -1,3 +1,4 @@
+---
 title: python复习笔记
 entitle: 'python interview'
 categories: interview

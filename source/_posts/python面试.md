@@ -1,3 +1,4 @@
+---
 title: python面试
 entitle: 'python interview Q&A'
 categories: interview

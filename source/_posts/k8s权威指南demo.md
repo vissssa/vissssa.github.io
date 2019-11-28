@@ -5,6 +5,7 @@ tags:
 categories:
   - cloud
 date: 2019-5-15
+description: k8s初探
 ---
 
 1. 创建一个虚拟linux环境，本次是centos7

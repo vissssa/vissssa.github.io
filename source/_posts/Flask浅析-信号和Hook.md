@@ -1,3 +1,4 @@
+---
 title: Flask浅析-信号和Hook
 entitle: 'FLask-signals & hook'
 categories: Flask

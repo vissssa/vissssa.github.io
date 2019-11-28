@@ -7,6 +7,7 @@ tags:
 categories:
   - env
 date: 2019-5-15
+description: 在给电信局部署深度学习监测安全问题时部署的文档笔记
 ---
 # Zookeeper安装与部署
 **首先,根据zookeeper的原理,他必须至少是三个,且为奇数,因为它的master主线程死了可以自动选举出一个,要求是剩下的节点必须大于总共的半数**

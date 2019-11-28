@@ -5,6 +5,7 @@ tags:
 categories:
   - cloud
 date: 2019-5-15
+description: k8s的一些知识，关于pause容器
 ---
 
 > 来自[jimmysong.io](https://jimmysong.io/kubernetes-handbook/concepts/pause-container.html#)

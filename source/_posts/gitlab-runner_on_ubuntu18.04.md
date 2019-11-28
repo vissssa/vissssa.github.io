@@ -1,3 +1,4 @@
+---
 title: gitlab-runner-ssh_on_ubuntu18.04
 entitle: 'gitlab-runner'
 categories: deploy
