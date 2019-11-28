@@ -55,7 +55,7 @@ footer:
   icon: user
 
   # If not defined, will be used `author` from Hexo main config.
-  copyright: @vissssa.club
+  copyright: vissssa.club
   # -------------------------------------------------------------
   # Hexo link (Powered by Hexo).
   powered: true
