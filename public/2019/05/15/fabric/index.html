@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://vissssa.club').hostname,
+    root: '/',
+    scheme: 'Muse',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: '',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="官方文档在这: Fabric 废话不多说，直接上代码 1# -*- coding: utf-8 -*-2# @Time    : 2018&amp;#x2F;8&amp;#x2F;9 10:133# @Author  : vissssa4# @Email   : 292724306@qq.com5# @File    : fabfile.py6# @Software: PyCharm7from fabric.ap">
+<meta name="keywords" content="python,fabric">
+<meta property="og:type" content="article">
+<meta property="og:title" content="fabric使用笔记">
+<meta property="og:url" content="http:&#x2F;&#x2F;vissssa.club&#x2F;2019&#x2F;05&#x2F;15&#x2F;fabric&#x2F;index.html">
+<meta property="og:site_name" content="vissssa">
+<meta property="og:description" content="官方文档在这: Fabric 废话不多说，直接上代码 1# -*- coding: utf-8 -*-2# @Time    : 2018&amp;#x2F;8&amp;#x2F;9 10:133# @Author  : vissssa4# @Email   : 292724306@qq.com5# @File    : fabfile.py6# @Software: PyCharm7from fabric.ap">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-28T07:18:14.835Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://vissssa.club/2019/05/15/fabric/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>fabric使用笔记 | vissssa</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">vissssa</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <p class="site-subtitle">我的一些笔记，人生感悟、读后感、开箱评测等</p>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+  </ul>
+
+</nav>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vissssa.club/2019/05/15/fabric/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="vissssa">
+      <meta itemprop="description" content="python, flask, linux, 架构, 生活, 科技">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vissssa">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          fabric使用笔记
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-05-15 00:00:00" itemprop="dateCreated datePublished" datetime="2019-05-15T00:00:00+08:00">2019-05-15</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-28 15:18:14" itemprop="dateModified" datetime="2019-11-28T15:18:14+08:00">2019-11-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/artifact/" itemprop="url" rel="index">
+                    <span itemprop="name">artifact</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>官方文档在这: <a href="http://fabric-chs.readthedocs.io/zh_CN/chs/tutorial.html" target="_blank" rel="noopener">Fabric</a></p>
+<p>废话不多说，直接上代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span></pre></td><td class="code"><pre><span class="line"># -*- coding: utf-8 -*-</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">2</span></pre></td><td class="code"><pre><span class="line"># @Time    : 2018&#x2F;8&#x2F;9 10:13</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">3</span></pre></td><td class="code"><pre><span class="line"># @Author  : vissssa</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">4</span></pre></td><td class="code"><pre><span class="line"># @Email   : 292724306@qq.com</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">5</span></pre></td><td class="code"><pre><span class="line"># @File    : fabfile.py</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">6</span></pre></td><td class="code"><pre><span class="line"># @Software: PyCharm</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">7</span></pre></td><td class="code"><pre><span class="line">from fabric.api import *</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">8</span></pre></td><td class="code"><pre><span class="line">from datetime import datetime</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">9</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">10</span></pre></td><td class="code"><pre><span class="line">env.user &#x3D; &#39;root&#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">11</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">12</span></pre></td><td class="code"><pre><span class="line">zookeeper01 &#x3D; &#39;root@192.168.1.168&#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">13</span></pre></td><td class="code"><pre><span class="line">zookeeper02 &#x3D; &#39;root@192.168.1.167&#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">14</span></pre></td><td class="code"><pre><span class="line">zookeeper03 &#x3D; &#39;root@192.168.1.166&#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">15</span></pre></td><td class="code"><pre><span class="line">nimbus &#x3D; &#39;root@192.168.1.164&#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">16</span></pre></td><td class="code"><pre><span class="line">nimbus_noroot &#x3D; &#39;123@192.168.1.164&#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">17</span></pre></td><td class="code"><pre><span class="line">supervisor01 &#x3D; &#39;root@192.168.1.165&#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">18</span></pre></td><td class="code"><pre><span class="line">supervisor02 &#x3D; &#39;root@192.168.1.163&#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">19</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">20</span></pre></td><td class="code"><pre><span class="line">local_dir &#x3D; &#39;&#x2F;Users&#x2F;zhangyu&#x2F;PycharmProjects&#x2F;fabric_test&#x2F;local_dir&#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">21</span></pre></td><td class="code"><pre><span class="line">remote_dir &#x3D; &#39;&#x2F;home&#x2F;123&#x2F;project_dpi&#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">22</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">23</span></pre></td><td class="code"><pre><span class="line"># 为了后续分类并行执行命令</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">24</span></pre></td><td class="code"><pre><span class="line">env.roledefs &#x3D; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">25</span></pre></td><td class="code"><pre><span class="line">    &#39;zookeeper&#39;: [zookeeper01, zookeeper02, zookeeper03],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">26</span></pre></td><td class="code"><pre><span class="line">    &#39;zookeeper01&#39;: [zookeeper01],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">27</span></pre></td><td class="code"><pre><span class="line">    &#39;zookeeper02&#39;: [zookeeper02],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">28</span></pre></td><td class="code"><pre><span class="line">    &#39;zookeeper03&#39;: [zookeeper03],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">29</span></pre></td><td class="code"><pre><span class="line">    &#39;nimbus&#39;: [nimbus],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">30</span></pre></td><td class="code"><pre><span class="line">    &#39;supervisor01&#39;: [supervisor01],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">31</span></pre></td><td class="code"><pre><span class="line">    &#39;supervisor02&#39;: [supervisor02],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">32</span></pre></td><td class="code"><pre><span class="line">    &#39;storm&#39;: [nimbus, supervisor01, supervisor02],</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">33</span></pre></td><td class="code"><pre><span class="line">    &#39;nimbus_noroot&#39;: [nimbus_noroot]</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">34</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">35</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">36</span></pre></td><td class="code"><pre><span class="line"># 需要注意的是，这里的host strings必须由username@host:port三部分构成，缺一不可，否则运行时还是会要求输入密码</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">37</span></pre></td><td class="code"><pre><span class="line">env.passwords &#x3D; &#123;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">38</span></pre></td><td class="code"><pre><span class="line">    &#39;&#123;&#125;:22&#39;.format(zookeeper01): &#39;123123&#39;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">39</span></pre></td><td class="code"><pre><span class="line">    &#39;&#123;&#125;:22&#39;.format(zookeeper02): &#39;123123&#39;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">40</span></pre></td><td class="code"><pre><span class="line">    &#39;&#123;&#125;:22&#39;.format(zookeeper03): &#39;123123&#39;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">41</span></pre></td><td class="code"><pre><span class="line">    &#39;&#123;&#125;:22&#39;.format(nimbus): &#39;123123&#39;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">42</span></pre></td><td class="code"><pre><span class="line">    &#39;&#123;&#125;:22&#39;.format(supervisor01): &#39;123123&#39;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">43</span></pre></td><td class="code"><pre><span class="line">    &#39;&#123;&#125;:22&#39;.format(supervisor02): &#39;123123&#39;,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">44</span></pre></td><td class="code"><pre><span class="line">    &#39;&#123;&#125;:22&#39;.format(nimbus_noroot): &#39;123&#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">45</span></pre></td><td class="code"><pre><span class="line">&#125;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">46</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">47</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">48</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;zookeeper&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">49</span></pre></td><td class="code"><pre><span class="line">@parallel</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">50</span></pre></td><td class="code"><pre><span class="line">def put_zookeeper():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">51</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;zookeeper-3.4.9.tar.gz&#39;.format(local_dir), &#39;&#x2F;usr&#x2F;local&#x2F;zookeeper-3.4.9.tar.gz&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">52</span></pre></td><td class="code"><pre><span class="line">    with cd(&#39;&#x2F;usr&#x2F;local&#39;):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">53</span></pre></td><td class="code"><pre><span class="line">        run(&#39;tar -zxvf zookeeper-3.4.9.tar.gz&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">54</span></pre></td><td class="code"><pre><span class="line">        run(&#39;mv zookeeper-3.4.9 zookeeper&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">55</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;zoo.cfg&#39;.format(local_dir), &#39;&#x2F;usr&#x2F;local&#x2F;zookeeper&#x2F;conf&#x2F;zoo.cfg&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">56</span></pre></td><td class="code"><pre><span class="line">    run(&#39;iptables -I INPUT -m state --state NEW -p tcp --dport 2181 -j ACCEPT&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">57</span></pre></td><td class="code"><pre><span class="line">    run(&#39;iptables -I INPUT -m state --state NEW -p tcp --dport 2888 -j ACCEPT&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">58</span></pre></td><td class="code"><pre><span class="line">    run(&#39;iptables -I INPUT -m state --state NEW -p tcp --dport 3888 -j ACCEPT&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">59</span></pre></td><td class="code"><pre><span class="line">    # 讲开放端口保存到配置中</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">60</span></pre></td><td class="code"><pre><span class="line">    run(&#39;service iptables save&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">61</span></pre></td><td class="code"><pre><span class="line">    run(&#39;service iptables restart&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">62</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">63</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">64</span></pre></td><td class="code"><pre><span class="line"># 三种不同的myid</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">65</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;zookeeper01&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">66</span></pre></td><td class="code"><pre><span class="line">def myid1():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">67</span></pre></td><td class="code"><pre><span class="line">    with cd(&#39;&#x2F;usr&#x2F;local&#x2F;zookeeper&#39;):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">68</span></pre></td><td class="code"><pre><span class="line">        run(&#39;mkdir -p -p data&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">69</span></pre></td><td class="code"><pre><span class="line">        run(&#39;echo 0 &gt;&gt; data&#x2F;myid&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">70</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">71</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">72</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;zookeeper02&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">73</span></pre></td><td class="code"><pre><span class="line">def myid2():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">74</span></pre></td><td class="code"><pre><span class="line">    with cd(&#39;&#x2F;usr&#x2F;local&#x2F;zookeeper&#39;):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">75</span></pre></td><td class="code"><pre><span class="line">        run(&#39;mkdir -p -p data&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">76</span></pre></td><td class="code"><pre><span class="line">        run(&#39;echo 1 &gt;&gt; data&#x2F;myid&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">77</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">78</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">79</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;zookeeper03&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">80</span></pre></td><td class="code"><pre><span class="line">def myid3():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">81</span></pre></td><td class="code"><pre><span class="line">    with cd(&#39;&#x2F;usr&#x2F;local&#x2F;zookeeper&#39;):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">82</span></pre></td><td class="code"><pre><span class="line">        run(&#39;mkdir -p -p data&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">83</span></pre></td><td class="code"><pre><span class="line">        run(&#39;echo 2 &gt;&gt; data&#x2F;myid&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">84</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">85</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">86</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;zookeeper&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">87</span></pre></td><td class="code"><pre><span class="line">@parallel</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">88</span></pre></td><td class="code"><pre><span class="line">def start_zkp():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">89</span></pre></td><td class="code"><pre><span class="line">    with cd(&#39;&#x2F;usr&#x2F;local&#x2F;zookeeper&#39;):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">90</span></pre></td><td class="code"><pre><span class="line">        run(&#39;bin&#x2F;zkServer.sh start&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">91</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">92</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">93</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;zookeeper&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">94</span></pre></td><td class="code"><pre><span class="line">def status_zkp():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">95</span></pre></td><td class="code"><pre><span class="line">    with cd(&#39;&#x2F;usr&#x2F;local&#x2F;zookeeper&#39;):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">96</span></pre></td><td class="code"><pre><span class="line">        run(&#39;bin&#x2F;zkServer.sh status&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">97</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">98</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">99</span></pre></td><td class="code"><pre><span class="line">def task_zkp():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">100</span></pre></td><td class="code"><pre><span class="line">    with open(&#39;time.txt&#39;, &#39;a&#39;) as f:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">101</span></pre></td><td class="code"><pre><span class="line">        f.write(&#39;zkp start: &#123;&#125; \n&#39;.format(str(datetime.now())))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">102</span></pre></td><td class="code"><pre><span class="line">    execute(put_zookeeper)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">103</span></pre></td><td class="code"><pre><span class="line">    execute(myid1)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">104</span></pre></td><td class="code"><pre><span class="line">    execute(myid2)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">105</span></pre></td><td class="code"><pre><span class="line">    execute(myid3)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">106</span></pre></td><td class="code"><pre><span class="line">    execute(start_zkp)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">107</span></pre></td><td class="code"><pre><span class="line">    # execute(status_zkp)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">108</span></pre></td><td class="code"><pre><span class="line">    with open(&#39;time.txt&#39;, &#39;a&#39;) as f:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">109</span></pre></td><td class="code"><pre><span class="line">        f.write(&#39;zkp end: &#123;&#125; \n&#39;.format(str(datetime.now())))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">110</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">111</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">112</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;storm&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">113</span></pre></td><td class="code"><pre><span class="line">@parallel</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">114</span></pre></td><td class="code"><pre><span class="line">def put_storm():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">115</span></pre></td><td class="code"><pre><span class="line">    run(&#39;mkdir -p &#123;&#125; &amp;&amp; chmod 777 &#123;&#125;&#39;.format(remote_dir, remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">116</span></pre></td><td class="code"><pre><span class="line">    # 偶尔系统会自动更新，所以先把yum进程杀掉</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">117</span></pre></td><td class="code"><pre><span class="line">    run(&#39;rm -rf &#x2F;var&#x2F;run&#x2F;yum.pid&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">118</span></pre></td><td class="code"><pre><span class="line">    run(&#39;yum install java-1.8.0-openjdk -y&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">119</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;apache-storm-1.1.2.tar.gz&#39;.format(local_dir), &#39;&#123;&#125;&#x2F;apache-storm-1.1.2.tar.gz&#39;.format(remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">120</span></pre></td><td class="code"><pre><span class="line">    with cd(remote_dir):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">121</span></pre></td><td class="code"><pre><span class="line">        run(&#39;tar zxvf apache-storm-1.1.2.tar.gz&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">122</span></pre></td><td class="code"><pre><span class="line">        run(&#39;mkdir -p storm_data&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">123</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;storm.yaml&#39;.format(local_dir), &#39;&#123;&#125;&#x2F;apache-storm-1.1.2&#x2F;conf&#x2F;storm.yaml&#39;.format(remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">124</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">125</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">126</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;nimbus&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">127</span></pre></td><td class="code"><pre><span class="line">def put_hostname_n():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">128</span></pre></td><td class="code"><pre><span class="line">    # 把 storm.local.hostname:192.168.1.111 添加到第6行</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">129</span></pre></td><td class="code"><pre><span class="line">    run(&#39;&#39;&#39;sed -i &quot;6i storm.local.hostname: &#39;&#123;&#125;&#39;&quot; &#123;&#125;&#x2F;apache-storm-1.1.2&#x2F;conf&#x2F;storm.yaml&#39;&#39;&#39;.format(</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">130</span></pre></td><td class="code"><pre><span class="line">        nimbus.replace(&#39;root@&#39;, &#39;&#39;), remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">131</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">132</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">133</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;supervisor01&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">134</span></pre></td><td class="code"><pre><span class="line">def put_hostname_s1():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">135</span></pre></td><td class="code"><pre><span class="line">    run(&#39;&#39;&#39;sed -i &quot;6i storm.local.hostname: &#39;&#123;&#125;&#39;&quot; &#123;&#125;&#x2F;apache-storm-1.1.2&#x2F;conf&#x2F;storm.yaml&#39;&#39;&#39;.format(</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">136</span></pre></td><td class="code"><pre><span class="line">        supervisor01.replace(&#39;root@&#39;, &#39;&#39;), remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">137</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">138</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">139</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;supervisor02&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">140</span></pre></td><td class="code"><pre><span class="line">def put_hostname_s2():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">141</span></pre></td><td class="code"><pre><span class="line">    run(&#39;&#39;&#39;sed -i &quot;6i storm.local.hostname: &#39;&#123;&#125;&#39;&quot; &#123;&#125;&#x2F;apache-storm-1.1.2&#x2F;conf&#x2F;storm.yaml&#39;&#39;&#39;.format(</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">142</span></pre></td><td class="code"><pre><span class="line">        supervisor02.replace(&#39;root@&#39;, &#39;&#39;), remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">143</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">144</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">145</span></pre></td><td class="code"><pre><span class="line"># 放在一条命令中执行，且加上sleep，防止因为终端session关闭导致后台任务关闭</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">146</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;nimbus&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">147</span></pre></td><td class="code"><pre><span class="line">def start_n():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">148</span></pre></td><td class="code"><pre><span class="line">    run(&quot;$(nohup &#123;&#125;&#x2F;apache-storm-1.1.2&#x2F;bin&#x2F;storm ui &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;) &amp;&amp; sleep 1 &quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">149</span></pre></td><td class="code"><pre><span class="line">        &quot;&amp;&amp; $(nohup &#123;&#125;&#x2F;apache-storm-1.1.2&#x2F;bin&#x2F;storm nimbus &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;) &amp;&amp; sleep 1&quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">150</span></pre></td><td class="code"><pre><span class="line">        &quot;&amp;&amp; $(nohup &#123;&#125;&#x2F;apache-storm-1.1.2&#x2F;bin&#x2F;storm logviewer &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;) &amp;&amp; sleep 1&quot;.format(remote_dir,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">151</span></pre></td><td class="code"><pre><span class="line">                                                                                                    remote_dir,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">152</span></pre></td><td class="code"><pre><span class="line">                                                                                                    remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">153</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">154</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">155</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;supervisor01&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">156</span></pre></td><td class="code"><pre><span class="line">def start_s1():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">157</span></pre></td><td class="code"><pre><span class="line">    run(&quot;$(nohup &#123;&#125;&#x2F;apache-storm-1.1.2&#x2F;bin&#x2F;storm supervisor &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;) &amp;&amp; sleep 1 &quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">158</span></pre></td><td class="code"><pre><span class="line">        &quot;&amp;&amp; $(nohup &#123;&#125;&#x2F;apache-storm-1.1.2&#x2F;bin&#x2F;storm logviewer &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;) &amp;&amp; sleep 1&quot;.format(remote_dir,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">159</span></pre></td><td class="code"><pre><span class="line">                                                                                                    remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">160</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">161</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">162</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;supervisor02&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">163</span></pre></td><td class="code"><pre><span class="line">def start_s2():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">164</span></pre></td><td class="code"><pre><span class="line">    run(&quot;$(nohup &#123;&#125;&#x2F;apache-storm-1.1.2&#x2F;bin&#x2F;storm supervisor &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;) &amp;&amp; sleep 1 &quot;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">165</span></pre></td><td class="code"><pre><span class="line">        &quot;&amp;&amp; $(nohup &#123;&#125;&#x2F;apache-storm-1.1.2&#x2F;bin&#x2F;storm logviewer &gt;&#x2F;dev&#x2F;null 2&gt;&amp;1 &amp;) &amp;&amp; sleep 1&quot;.format(remote_dir,</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">166</span></pre></td><td class="code"><pre><span class="line">                                                                                                    remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">167</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">168</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">169</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;storm&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">170</span></pre></td><td class="code"><pre><span class="line">@parallel</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">171</span></pre></td><td class="code"><pre><span class="line">def ip_storm():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">172</span></pre></td><td class="code"><pre><span class="line">    run(&#39;iptables -I INPUT -m state --state NEW -p tcp --dport 8000 -j ACCEPT&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">173</span></pre></td><td class="code"><pre><span class="line">    run(&#39;iptables -I INPUT -m state --state NEW -p tcp --dport 8080 -j ACCEPT&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">174</span></pre></td><td class="code"><pre><span class="line">    run(&#39;iptables -I INPUT -m state --state NEW -p tcp --dport 6627 -j ACCEPT&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">175</span></pre></td><td class="code"><pre><span class="line">    run(&#39;iptables -I INPUT -m state --state NEW -p tcp --dport 6700 -j ACCEPT&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">176</span></pre></td><td class="code"><pre><span class="line">    run(&#39;iptables -I INPUT -m state --state NEW -p tcp --dport 6701 -j ACCEPT&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">177</span></pre></td><td class="code"><pre><span class="line">    run(&#39;iptables -I INPUT -m state --state NEW -p tcp --dport 6702 -j ACCEPT&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">178</span></pre></td><td class="code"><pre><span class="line">    run(&#39;iptables -I INPUT -m state --state NEW -p tcp --dport 6703 -j ACCEPT&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">179</span></pre></td><td class="code"><pre><span class="line">    run(&#39;service iptables save&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">180</span></pre></td><td class="code"><pre><span class="line">    run(&#39;service iptables restart&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">181</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">182</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">183</span></pre></td><td class="code"><pre><span class="line"># 杀掉storm任务</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">184</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;supervisor02&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">185</span></pre></td><td class="code"><pre><span class="line">def stop_storm():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">186</span></pre></td><td class="code"><pre><span class="line">    # run(&quot;kill &#96;ps aux | egrep &#39;(daemon\.nimbus)|(storm\.ui\.core)&#39; | fgrep -v egrep | awk &#39;&#123;print $2&#125;&#39;&#96;&quot;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">187</span></pre></td><td class="code"><pre><span class="line">    run(&quot;kill &#96;ps aux | fgrep storm | fgrep -v &#39;fgrep&#39; | awk &#39;&#123;print $2&#125;&#39;&#96;&quot;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">188</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">189</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">190</span></pre></td><td class="code"><pre><span class="line">def task_storm():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">191</span></pre></td><td class="code"><pre><span class="line">    with open(&#39;time.txt&#39;, &#39;a&#39;) as f:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">192</span></pre></td><td class="code"><pre><span class="line">        f.write(&#39;storm start: &#123;&#125; \n&#39;.format(str(datetime.now())))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">193</span></pre></td><td class="code"><pre><span class="line">    execute(put_storm)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">194</span></pre></td><td class="code"><pre><span class="line">    execute(put_hostname_n)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">195</span></pre></td><td class="code"><pre><span class="line">    execute(put_hostname_s1)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">196</span></pre></td><td class="code"><pre><span class="line">    execute(put_hostname_s2)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">197</span></pre></td><td class="code"><pre><span class="line">    execute(ip_storm)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">198</span></pre></td><td class="code"><pre><span class="line">    execute(start_n)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">199</span></pre></td><td class="code"><pre><span class="line">    execute(start_s1)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">200</span></pre></td><td class="code"><pre><span class="line">    execute(start_s2)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">201</span></pre></td><td class="code"><pre><span class="line">    with open(&#39;time.txt&#39;, &#39;a&#39;) as f:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">202</span></pre></td><td class="code"><pre><span class="line">        f.write(&#39;storm end: &#123;&#125; \n&#39;.format(str(datetime.now())))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">203</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">204</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">205</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;storm&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">206</span></pre></td><td class="code"><pre><span class="line">@parallel</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">207</span></pre></td><td class="code"><pre><span class="line">def put_python3():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">208</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;Python-3.6.6.tgz&#39;.format(local_dir), &#39;&#123;&#125;&#x2F;Python-3.6.6.tgz&#39;.format(remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">209</span></pre></td><td class="code"><pre><span class="line">    with cd(remote_dir):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">210</span></pre></td><td class="code"><pre><span class="line">        run(&#39;rm -rf &#x2F;var&#x2F;run&#x2F;yum.pid&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">211</span></pre></td><td class="code"><pre><span class="line">        run(&#39;yum install zlib-devel bzip2-devel openssl-devel ncurese-devel gcc zlib sqlite-devel -y&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">212</span></pre></td><td class="code"><pre><span class="line">        run(&#39;tar zxvf Python-3.6.6.tgz&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">213</span></pre></td><td class="code"><pre><span class="line">        with cd(&#39;Python-3.6.6&#39;):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">214</span></pre></td><td class="code"><pre><span class="line">            run(&#39;.&#x2F;configure --enable-loadable-sqlite-extensions --prefix&#x3D;&#x2F;usr&#x2F;local&#x2F;python3 &amp;&amp; make &amp;&amp; make install&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">215</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">216</span></pre></td><td class="code"><pre><span class="line">    run(&#39;ln -s &#x2F;usr&#x2F;local&#x2F;python3&#x2F;bin&#x2F;python3 &#x2F;usr&#x2F;bin&#x2F;python3&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">217</span></pre></td><td class="code"><pre><span class="line">    run(&#39;ln -s &#x2F;usr&#x2F;local&#x2F;python3&#x2F;bin&#x2F;pip3 &#x2F;usr&#x2F;bin&#x2F;pip3&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">218</span></pre></td><td class="code"><pre><span class="line">    with cd(&#39;~&#x2F;.config&#39;):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">219</span></pre></td><td class="code"><pre><span class="line">        run(&#39;mkdir -p pip&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">220</span></pre></td><td class="code"><pre><span class="line">        put(&#39;&#123;&#125;&#x2F;pip.conf&#39;.format(local_dir), &#39;~&#x2F;.config&#x2F;pip&#x2F;pip.conf&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">221</span></pre></td><td class="code"><pre><span class="line">    run(&#39;pip3 install virtualenv&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">222</span></pre></td><td class="code"><pre><span class="line">    run(&#39;&#39;&#39;echo &#39;export PATH&#x3D;&quot;$PATH:&#x2F;usr&#x2F;local&#x2F;python3&#x2F;bin&quot;&#39; &gt;&gt; &#x2F;etc&#x2F;profile&#39;&#39;&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">223</span></pre></td><td class="code"><pre><span class="line">    run(&#39;source &#x2F;etc&#x2F;profile&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">224</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">225</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">226</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;storm&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">227</span></pre></td><td class="code"><pre><span class="line">@parallel</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">228</span></pre></td><td class="code"><pre><span class="line">def update_glibc():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">229</span></pre></td><td class="code"><pre><span class="line">    # 找到新的快速升级方法</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">230</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;glibc-2.17-55.el6.x86_64.rpm&#39;.format(local_dir),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">231</span></pre></td><td class="code"><pre><span class="line">        &#39;&#123;&#125;&#x2F;glibc-2.17-55.el6.x86_64.rpm&#39;.format(remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">232</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;glibc-common-2.17-55.el6.x86_64.rpm&#39;.format(local_dir),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">233</span></pre></td><td class="code"><pre><span class="line">        &#39;&#123;&#125;&#x2F;glibc-common-2.17-55.el6.x86_64.rpm&#39;.format(remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">234</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;glibc-devel-2.17-55.el6.x86_64.rpm&#39;.format(local_dir),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">235</span></pre></td><td class="code"><pre><span class="line">        &#39;&#123;&#125;&#x2F;glibc-devel-2.17-55.el6.x86_64.rpm&#39;.format(remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">236</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;glibc-headers-2.17-55.el6.x86_64.rpm&#39;.format(local_dir),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">237</span></pre></td><td class="code"><pre><span class="line">        &#39;&#123;&#125;&#x2F;glibc-headers-2.17-55.el6.x86_64.rpm&#39;.format(remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">238</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;update_glibc.sh&#39;.format(local_dir), &#39;&#123;&#125;&#x2F;update_glibc.sh&#39;.format(remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">239</span></pre></td><td class="code"><pre><span class="line">    run(&#39;yum install kernel-headers -y&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">240</span></pre></td><td class="code"><pre><span class="line">    with cd(remote_dir):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">241</span></pre></td><td class="code"><pre><span class="line">        run(&#39;bash update_glibc.sh&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">242</span></pre></td><td class="code"><pre><span class="line">    run(&#39;strings &#x2F;lib64&#x2F;libc.so.6 | grep GLIBC&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">243</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">244</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">245</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;storm&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">246</span></pre></td><td class="code"><pre><span class="line">@parallel</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">247</span></pre></td><td class="code"><pre><span class="line">def update_gcc():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">248</span></pre></td><td class="code"><pre><span class="line">    # 直接安装gcc-4.8.1会出现make error的情况， 所以我直接拿生成好的libstdc++so.6.18来替换</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">249</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;libstdc++.so.6.0.18&#39;.format(local_dir), &#39;&#x2F;usr&#x2F;lib64&#x2F;libstdc++.so.6.0.18&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">250</span></pre></td><td class="code"><pre><span class="line">    with cd(&#39;&#x2F;usr&#x2F;lib64&#39;):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">251</span></pre></td><td class="code"><pre><span class="line">        run(&#39;rm -rf libstdc++.so.6&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">252</span></pre></td><td class="code"><pre><span class="line">        run(&#39;ln -s libstdc++.so.6.0.18 libstdc++.so.6&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">253</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">254</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">255</span></pre></td><td class="code"><pre><span class="line">def task_env():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">256</span></pre></td><td class="code"><pre><span class="line">    with open(&#39;time.txt&#39;, &#39;a&#39;) as f:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">257</span></pre></td><td class="code"><pre><span class="line">        f.write(&#39;env start: &#123;&#125; \n&#39;.format(str(datetime.now())))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">258</span></pre></td><td class="code"><pre><span class="line">    execute(put_python3)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">259</span></pre></td><td class="code"><pre><span class="line">    with open(&#39;time.txt&#39;, &#39;a&#39;) as f:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">260</span></pre></td><td class="code"><pre><span class="line">        f.write(&#39;glibc start: &#123;&#125; \n&#39;.format(str(datetime.now())))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">261</span></pre></td><td class="code"><pre><span class="line">    execute(update_glibc)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">262</span></pre></td><td class="code"><pre><span class="line">    with open(&#39;time.txt&#39;, &#39;a&#39;) as f:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">263</span></pre></td><td class="code"><pre><span class="line">        f.write(&#39;glibc end: &#123;&#125; \n&#39;.format(str(datetime.now())))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">264</span></pre></td><td class="code"><pre><span class="line">    execute(update_gcc)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">265</span></pre></td><td class="code"><pre><span class="line">    with open(&#39;time.txt&#39;, &#39;a&#39;) as f:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">266</span></pre></td><td class="code"><pre><span class="line">        f.write(&#39;env end: &#123;&#125; \n&#39;.format(str(datetime.now())))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">267</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">268</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">269</span></pre></td><td class="code"><pre><span class="line"># lein和sparse submit只能在非root中执行</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">270</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;nimbus_noroot&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">271</span></pre></td><td class="code"><pre><span class="line">def start_project():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">272</span></pre></td><td class="code"><pre><span class="line">    # 下载容易出问题，换成直接上传包</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">273</span></pre></td><td class="code"><pre><span class="line">    run(&#39;mkdir -p ~&#x2F;bin&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">274</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;lein&#39;.format(local_dir), &#39;~&#x2F;bin&#x2F;lein&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">275</span></pre></td><td class="code"><pre><span class="line">    run(&#39;mkdir -p ~&#x2F;.lein&#x2F;self-installs&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">276</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;leiningen-2.8.1-standalone.jar&#39;.format(local_dir),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">277</span></pre></td><td class="code"><pre><span class="line">        &#39;~&#x2F;.lein&#x2F;self-installs&#x2F;leiningen-2.8.1-standalone.jar&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">278</span></pre></td><td class="code"><pre><span class="line">    run(&#39;chmod a+x ~&#x2F;bin&#x2F;lein&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">279</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">280</span></pre></td><td class="code"><pre><span class="line">    execute(pip)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">281</span></pre></td><td class="code"><pre><span class="line">    execute(nimbus_pip)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">282</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">283</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;dpi_detection.zip&#39;.format(local_dir), &#39;&#123;&#125;&#x2F;dpi_detection.zip&#39;.format(remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">284</span></pre></td><td class="code"><pre><span class="line">    with cd(remote_dir):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">285</span></pre></td><td class="code"><pre><span class="line">        run(&#39;unzip dpi_detection.zip&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">286</span></pre></td><td class="code"><pre><span class="line">        with cd(&#39;dpi_detection&#39;):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">287</span></pre></td><td class="code"><pre><span class="line">            run(&#39;sparse submit&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">288</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">289</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">290</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;storm&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">291</span></pre></td><td class="code"><pre><span class="line">@parallel</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">292</span></pre></td><td class="code"><pre><span class="line">def pip():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">293</span></pre></td><td class="code"><pre><span class="line">    # 安装python3所需要的包</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">294</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;requirements.txt&#39;.format(local_dir), &#39;&#123;&#125;&#x2F;requirements.txt&#39;.format(remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">295</span></pre></td><td class="code"><pre><span class="line">    run(&#39;source &#x2F;etc&#x2F;profile &amp;&amp; virtualenv &#x2F;data&#x2F;virtualenvs&#x2F;dpi_detection&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">296</span></pre></td><td class="code"><pre><span class="line">    put(&#39;&#123;&#125;&#x2F;torch-0.4.1-cp36-cp36m-linux_x86_64.whl&#39;.format(local_dir),</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">297</span></pre></td><td class="code"><pre><span class="line">        &#39;&#123;&#125;&#x2F;torch-0.4.1-cp36-cp36m-linux_x86_64.whl&#39;.format(remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">298</span></pre></td><td class="code"><pre><span class="line">    # 偶尔因为网络问题断开，所以三次重试</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">299</span></pre></td><td class="code"><pre><span class="line">    for i in range(0, 3):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">300</span></pre></td><td class="code"><pre><span class="line">        try:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">301</span></pre></td><td class="code"><pre><span class="line">            run(&#39;source &#x2F;data&#x2F;virtualenvs&#x2F;dpi_detection&#x2F;bin&#x2F;activate &#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">302</span></pre></td><td class="code"><pre><span class="line">                &#39;&amp;&amp; pip3 install &#123;&#125;&#x2F;torch-0.4.1-cp36-cp36m-linux_x86_64.whl &#39;</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">303</span></pre></td><td class="code"><pre><span class="line">                &#39;&amp;&amp; pip3 install -r &#123;&#125;&#x2F;requirements.txt&#39;.format(remote_dir, remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">304</span></pre></td><td class="code"><pre><span class="line">        except:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">305</span></pre></td><td class="code"><pre><span class="line">            pass</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">306</span></pre></td><td class="code"><pre><span class="line">        else:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">307</span></pre></td><td class="code"><pre><span class="line">            break</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">308</span></pre></td><td class="code"><pre><span class="line">    # root权限创建日志文件夹</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">309</span></pre></td><td class="code"><pre><span class="line">    run(&#39;mkdir -p &#x2F;var&#x2F;log&#x2F;storm&#x2F;streamparse&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">310</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">311</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">312</span></pre></td><td class="code"><pre><span class="line">@roles(&#39;nimbus&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">313</span></pre></td><td class="code"><pre><span class="line">def nimbus_pip():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">314</span></pre></td><td class="code"><pre><span class="line">    for i in range(0, 3):</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">315</span></pre></td><td class="code"><pre><span class="line">        try:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">316</span></pre></td><td class="code"><pre><span class="line">            run(&#39;pip3 install --upgrade pip&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">317</span></pre></td><td class="code"><pre><span class="line">            run(&#39;pip3 install &#123;&#125;&#x2F;torch-0.4.1-cp36-cp36m-linux_x86_64.whl&#39;.format(remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">318</span></pre></td><td class="code"><pre><span class="line">            run(&#39;pip3 install -r &#123;&#125;&#x2F;requirements.txt&#39;.format(remote_dir))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">319</span></pre></td><td class="code"><pre><span class="line">        except:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">320</span></pre></td><td class="code"><pre><span class="line">            pass</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">321</span></pre></td><td class="code"><pre><span class="line">        else:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">322</span></pre></td><td class="code"><pre><span class="line">            break</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">323</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">324</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">325</span></pre></td><td class="code"><pre><span class="line">def task_project():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">326</span></pre></td><td class="code"><pre><span class="line">    with open(&#39;time.txt&#39;, &#39;a&#39;) as f:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">327</span></pre></td><td class="code"><pre><span class="line">        f.write(&#39;project start: &#123;&#125; \n&#39;.format(str(datetime.now())))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">328</span></pre></td><td class="code"><pre><span class="line">    execute(start_project)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">329</span></pre></td><td class="code"><pre><span class="line">    with open(&#39;time.txt&#39;, &#39;a&#39;) as f:</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">330</span></pre></td><td class="code"><pre><span class="line">        f.write(&#39;project end: &#123;&#125; \n&#39;.format(str(datetime.now())))</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">331</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">332</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">333</span></pre></td><td class="code"><pre><span class="line">def task():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">334</span></pre></td><td class="code"><pre><span class="line">    execute(task_zkp)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">335</span></pre></td><td class="code"><pre><span class="line">    execute(task_storm)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">336</span></pre></td><td class="code"><pre><span class="line">    execute(task_env)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">337</span></pre></td><td class="code"><pre><span class="line">    execute(task_project)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">338</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">339</span></pre></td><td class="code"><pre><span class="line"></span></pre></td></tr><tr><td class="gutter"><pre><span class="line">340</span></pre></td><td class="code"><pre><span class="line">def glibc():</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">341</span></pre></td><td class="code"><pre><span class="line">    run(&#39;strings &#x2F;lib64&#x2F;libc.so.6 | grep GLIBC&#39;)</span></pre></td></tr><tr><td class="gutter"><pre><span class="line">342</span></pre></td><td class="code"><pre><span class="line">    run(&#39;strings &#x2F;usr&#x2F;lib64&#x2F;libstdc++.so.6 | grep GLIBCXX&#39;)</span></pre></td></tr></table></figure>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/fabric/" rel="tag"># fabric</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2019/05/15/git%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/" rel="prev" title="git常用命令">
+      <i class="fa fa-chevron-left"></i> git常用命令
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/05/15/ceph%E5%88%9D%E8%A7%81%E9%83%A8%E7%BD%B2%E4%BD%BF%E7%94%A8/" rel="next" title="ceph初见部署使用">
+      ceph初见部署使用 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">vissssa</p>
+  <div class="site-description" itemprop="description">python, flask, linux, 架构, 生活, 科技</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vissssa</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.5.0
+  </div>
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/muse.js"></script>
+<script src="/js/next-boot.js"></script>
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
+</html>
