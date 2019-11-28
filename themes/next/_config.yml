@@ -27,15 +27,19 @@ override: false
 # For example, you put your favicons into `hexo-site/source/images` directory.
 # Then need to rename & redefine they on any other names, otherwise icons from Next will rewrite your custom icons in Hexo.
 favicon:
-  small: /images/favicon-16x16-next.png
-  medium: /images/favicon-32x32-next.png
-  apple_touch_icon: /images/apple-touch-icon-next.png
-  safari_pinned_tab: /images/logo.svg
+  small: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/favicon.ico
+  medium: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/favicon.ico
+  apple_touch_icon: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/favicon.ico
+  safari_pinned_tab: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/favicon.ico
+  # small: /images/favicon-16x16-next.png
+  # medium: /images/favicon-32x32-next.png
+  # apple_touch_icon: /images/apple-touch-icon-next.png
+  # safari_pinned_tab: /images/logo.svg
   #android_manifest: /images/manifest.json
   #ms_browserconfig: /images/browserconfig.xml
 
 # Set default keywords (Use a comma to separate)
-keywords: "Hexo, NexT"
+keywords: "python, flask, linux, 架构, 生活, 科技"
 
 # Set rss to false to disable feed link.
 # Leave rss as empty to use site's feed link.
@@ -93,7 +97,7 @@ index_with_subtitle: false
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
 menu:
   home: / || home
-  #about: /about/ || user
+  about: /about/ || user
   tags: /tags || tags
   categories: /categories || categories
   archives: /archives || archives
@@ -129,7 +133,7 @@ scheme: Muse
 social:
   GitHub: https://github.com/vissssa || github
   E-Mail: mailto:zhangyu18223@gmail || envelope
-  微博: https://weibo.com/vissssa || 微博
+  微博: https://weibo.com/vissssa || weibo
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
@@ -141,7 +145,6 @@ social:
 
 social_icons:
   enable: true
-  微博: weibo
   icons_only: false
   transition: false
 
@@ -218,7 +221,7 @@ excerpt_description: true
 # Automatically Excerpt. Not recommend.
 # Please use <!-- more --> in the post to control excerpt accurately.
 auto_excerpt:
-  enable: false
+  enable: true
   length: 150
 
 # Post meta display settings
@@ -279,7 +282,7 @@ custom_logo:
 # Available value:
 #    normal | night | night eighties | night blue | night bright
 # https://github.com/chriskempson/tomorrow-theme
-highlight_theme: night eighties
+highlight_theme: night
 
 
 # ---------------------------------------------------------------
