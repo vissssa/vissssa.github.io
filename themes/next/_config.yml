@@ -92,11 +92,11 @@ index_with_subtitle: false
 # Value before `||` delimeter is the target link.
 # Value after `||` delimeter is the name of FontAwesome icon. If icon (with or without delimeter) is not specified, question icon will be loaded.
 menu:
-  home: /
+  home: / || home
   #about: /about/ || user
-  tags: /tags
-  categories: /categories
-  archives: /archives
+  tags: /tags || tags
+  categories: /categories || categories
+  archives: /archives || archives
   #schedule: /schedule/ || calendar
   #sitemap: /sitemap.xml || sitemap
   #commonweal: /404/ || heartbeat
@@ -129,7 +129,7 @@ scheme: Muse
 social:
   GitHub: https://github.com/vissssa || github
   E-Mail: mailto:zhangyu18223@gmail || envelope
-  微博: https://weibo.com/vissssa
+  微博: https://weibo.com/vissssa || 微博
   #Google: https://plus.google.com/yourname || google
   #Twitter: https://twitter.com/yourname || twitter
   #FB Page: https://www.facebook.com/yourname || facebook
@@ -156,12 +156,7 @@ links_layout: block
 # Sidebar Avatar
 # in theme directory(source/images): /images/avatar.gif
 # in site  directory(source/uploads): /uploads/avatar.gif
-avatar: 
-  url: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/74347936_p0_master1200.jpg
-  # If true, the avatar would be dispalyed in circle.
-  rounded: true
-  # If true, the avatar would be rotated with the cursor.
-  rotated: true
+avatar: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/74347936_p0_master1200.jpg
 
 # Table Of Contents in the Sidebar
 toc:
