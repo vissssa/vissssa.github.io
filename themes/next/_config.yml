@@ -533,7 +533,7 @@ mediumzoom: false
 
 # Vanilla JavaScript plugin for lazyloading images.
 # For more information: https://github.com/ApoorvSaxena/lozad.js
-lazyload: false
+lazyload: true
 
 # Pangu Support
 # For more information: https://github.com/vinta/pangu.js
@@ -857,8 +857,6 @@ pace:
   # corner-indicator | fill-left | flat-top | flash | loading-bar | mac-osx | material | minimal
   theme: flash
 
-three_waves: true
-
 # JavaScript 3D library.
 # Dependencies: https://github.com/theme-next/theme-next-three
 three:
@@ -1007,14 +1005,14 @@ vendors:
   pace_css:
 
   # Internal version: 1.0.0
-  three: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js
-  three_waves: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js
-  canvas_lines: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_lines.min.js
-  canvas_sphere: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_sphere.min.js
-  # three:
-  # three_waves:
-  # canvas_lines:
-  # canvas_sphere:
+  # three: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three.min.js
+  # three_waves: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/three-waves.min.js
+  # canvas_lines: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_lines.min.js
+  # canvas_sphere: //cdn.jsdelivr.net/gh/theme-next/theme-next-three@1/canvas_sphere.min.js
+  three:
+  three_waves:
+  canvas_lines:
+  canvas_sphere:
 
   # Internal version: 1.0.0
   # canvas_nest: //cdn.jsdelivr.net/gh/theme-next/theme-next-canvas-nest@1/canvas-nest.min.js
