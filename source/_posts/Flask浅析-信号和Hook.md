@@ -10,6 +10,7 @@ tags:
 keywords: Flask
 description: Flask浅析系列
 ---
+{% post_link Flask浅析-request上下文 %}
 由于翻看源码时看到flask根目录下有个`signals.py`文件，且部分代码如下
 
 ```python
