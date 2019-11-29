@@ -113,3 +113,8 @@ symbols_count_time:
   total_symbols: true
   total_time: true
   exclude_codeblock: false
+
+nofollow:
+    enable: true
+    exclude: # 例外链接
+    - http://vissssa.club
