@@ -40,10 +40,12 @@ custom_file_path:
 # ---------------------------------------------------------------
 
 favicon:
-  small: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/favicon.ico
-  medium: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/favicon.ico
-  apple_touch_icon: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/favicon.ico
-  safari_pinned_tab: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/favicon.ico
+  small: /images/vissssa_favicon.ico
+  medium: /images/vissssa_favicon.ico
+  apple_touch_icon: /images/vissssa_favicon.ico
+  safari_pinned_tab: /images/vissssa_favicon.ico
+  # apple_touch_icon: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/favicon.ico
+  # safari_pinned_tab: https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/favicon.ico
 
   #android_manifest: /images/manifest.json
   #ms_browserconfig: /images/browserconfig.xml
