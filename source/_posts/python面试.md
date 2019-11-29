@@ -1,13 +1,14 @@
 ---
 title: python面试
-entitle: 'python interview Q&A'
+entitle: python interview Q&A
 categories: interview
-date: 2019-05-24 12:30:00
 tags:
-    - interview
-    - python
+  - interview
+  - python
 keywords: python
 description: python面试题及答案
+abbrlink: e11f968c
+date: 2019-05-24 12:30:00
 ---
 ## python面试题及答案
 

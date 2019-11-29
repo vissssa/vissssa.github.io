@@ -8,6 +8,7 @@ categories:
   - env
 date: 2019-5-15
 description: 运维方面经验，当初用来一键生成网站(CI/CD)
+abbrlink: 52ded20
 ---
 ## 一、下载Jenkins
 

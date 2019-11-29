@@ -7,6 +7,7 @@ categories:
   - artifact
 date: 2019-5-15
 description: 运维方面经验，可以远程操作
+abbrlink: a6ebedf
 ---
 官方文档在这: [Fabric](http://fabric-chs.readthedocs.io/zh_CN/chs/tutorial.html)
 

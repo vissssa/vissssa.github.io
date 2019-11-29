@@ -8,6 +8,7 @@ categories:
   - env
 date: 2019-5-15
 description: 在给电信局部署深度学习监测安全问题时部署的文档笔记
+abbrlink: dea34e62
 ---
 目前主流的使用Storm的demo语言是Java,但我们使用的是Python,则需要引入一些第三方库,这里我选择的是**Streamparse**
 # 安装Streamparse

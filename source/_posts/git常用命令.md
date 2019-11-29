@@ -6,6 +6,7 @@ categories:
   - deep
 date: 2019-5-15
 description: 运维方面经验
+abbrlink: 423abe9e
 ---
 
 #### 1、建立联系

@@ -7,6 +7,7 @@ categories:
   - network
 date: 2019-5-15
 description: HTTP方面知识，来自一个repo
+abbrlink: 99a22ef9
 ---
 # 一 、基础概念
 

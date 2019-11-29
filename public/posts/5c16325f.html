@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.0.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/vissssa_favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/vissssa_favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/vissssa_favicon.ico">
+  <link rel="mask-icon" href="/images/vissssa_favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://vissssa.club').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: true,
+    pangu: true,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="一些零散的知识收集，等待扩展可以归档到各自分区">
+<meta name="keywords" content="redis,ipv4&#x2F;ipv6,snippets">
+<meta property="og:type" content="article">
+<meta property="og:title" content="知识片段收录">
+<meta property="og:url" content="http:&#x2F;&#x2F;vissssa.club&#x2F;posts&#x2F;5c16325f.html">
+<meta property="og:site_name" content="vissssa">
+<meta property="og:description" content="一些零散的知识收集，等待扩展可以归档到各自分区">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2019-11-29T08:30:35.627Z">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://vissssa.club/posts/5c16325f.html">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>知识片段收录 | vissssa</title>
+  
+
+
+  <script pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6c62fd314d902c62945f06eeb436ce1f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">vissssa</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">我的一些笔记，人生感悟、读后感、开箱评测等</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+        <li class="menu-item menu-item-commonweal">
+
+    <a href="/404/" rel="section"><i class="fa fa-fw fa-heartbeat"></i>公益 404</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/vissssa" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="external nofollow noopener noreferrer" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vissssa.club/posts/5c16325f.html">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/%E5%A4%B4%E5%83%8F%E5%8E%8B%E7%BC%A9%E7%89%88.jpg">
+      <meta itemprop="name" content="vissssa">
+      <meta itemprop="description" content="python, flask, linux, 架构, 生活, 科技">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vissssa">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          知识片段收录
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-03 00:00:00" itemprop="dateCreated datePublished" datetime="2019-06-03T00:00:00+08:00">2019-06-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2019-11-29 16:30:35" itemprop="dateModified" datetime="2019-11-29T16:30:35+08:00">2019-11-29</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deep/" itemprop="url" rel="index">
+                    <span itemprop="name">deep</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+            <div class="post-description">一些零散的知识收集，等待扩展可以归档到各自分区</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <h3 id="1、redis能否代替etcd或者zookeeper"><a href="#1、redis能否代替etcd或者zookeeper" class="headerlink" title="1、redis能否代替etcd或者zookeeper"></a>1、redis能否代替etcd或者zookeeper</h3><blockquote>
+<p>源自<a href="https://www.v2ex.com/t/520367" target="_blank" rel="external nofollow noopener noreferrer">https://www.v2ex.com/t/520367</a> #3 @xkeyideal</p>
+</blockquote>
+<p>简单从以下几个方面说一下redis为啥在微服务中不能取代 etcd：</p>
+<ol>
+<li>redis 没有版本的概念，历史版本数据在大规模微服务中非常有必要，对于状态回滚和故障排查，甚至定锅都很重要</li>
+<li>redis 的注册和发现目前只能通过 pub 和 sub 来实现，这两个命令完全不能满足生产环境的要求，具体原因可以 gg 或看源码实现</li>
+<li>etcd 在 2.+版本时，watch 到数据官方文档均建议再 get 一次，因为会存在数据延迟，3.+版本不再需要，可想 redis 的 pub 和 sub 能否达到此种低延迟的要求</li>
+<li>楼主看到的微服务架构应该都是将 etcd 直接暴露给 client 和 server 的，etcd 的性能摆在那，能够承受多少的 c/s 直连呢，更好的做法应该是对 etcd 做一层保护，当然这种做法会损失一些功能</li>
+<li>redis 和 etcd 的集群实现方案是不一致的，etcd 采用的是 raft 协议，一主多从，只能写主，底层采用 boltdb 作为 k/v 存储，直接落盘</li>
+<li>redis 的持久化方案有 aof 和 rdb，这两种方案在宕机的时候都或多或少的会丢失数据</li>
+</ol>
+<p>总结，redis从来没有想过抢 etcd 在服务注册和发现的饭碗，目前的架构来说也抢不动，在缓存方面目前在性能和功能也无出其右； etcd 只关注在服务注册与发现方面，非要当做 k/v 存储来用（丢弃 watch 特性而言）也可以用，性能也不错，但只能说你选错对象了</p>
+<p>微服务架构中选择哪种技术，取决于技术决定人的规划理想，非要说 redis 不行当然也是错的，不考虑服务规模和性能需求，用 mongodb 也能搞，mongodb 3.6+版本也有个 oplog watch 的功能</p>
+<h3 id="2、redis的使用场景"><a href="#2、redis的使用场景" class="headerlink" title="2、redis的使用场景"></a>2、redis的使用场景</h3><blockquote>
+<p>摘自<a href="https://github.com/CyC2018/CS-Notes.git" target="_blank" rel="external nofollow noopener noreferrer">https://github.com/CyC2018/CS-Notes.git</a> redis一栏</p>
+</blockquote>
+<ol>
+<li>计数器：int自增自建</li>
+<li>缓存：设置内存最大使用量和淘汰策略</li>
+<li>查找表：DNS记录</li>
+<li>消息队列：最好还是使用RabbitMQ或者Kafka</li>
+<li>会话缓存：分布式session</li>
+<li>分布式锁实现：SETNX或者RedLock</li>
+<li>其它：set的交集并集操作实现共同好友，排行榜</li>
+</ol>
+<h3 id="3、redis的持久化"><a href="#3、redis的持久化" class="headerlink" title="3、redis的持久化"></a>3、redis的持久化</h3><p>redis是具有持久化功能的，但是并不完全可靠，两种持久化方法：<code>RDB</code>和<code>AOF</code></p>
+<ol>
+<li><p>RDB持久化：</p>
+<p>将某个时间点的所有数据放到硬盘上，若数据大，时间很长，所以必须关闭该redis服务器，否则部分同步开始后的数据不会备份</p>
+</li>
+<li><p>AOF持久化：</p>
+<p>将写命令添加到 AOF 文件（Append Only File）的末尾。</p>
+<p>使用 AOF 持久化需要设置同步选项，从而确保写命令什么时候会同步到磁盘文件上。这是因为对文件进行写入并不会马上将内容同步到磁盘上，而是先存储到缓冲区，然后由操作系统决定什么时候同步到磁盘。有以下同步选项：</p>
+<table>
+<thead>
+<tr>
+<th align="center">选项</th>
+<th align="center">同步频率</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">always</td>
+<td align="center">每个写命令都同步</td>
+</tr>
+<tr>
+<td align="center">everysec</td>
+<td align="center">每秒同步一次</td>
+</tr>
+<tr>
+<td align="center">no</td>
+<td align="center">让操作系统来决定何时同步</td>
+</tr>
+</tbody></table>
+<ul>
+<li><p>always 选项会<strong>严重减低</strong>服务器的性能；</p>
+</li>
+<li><p>everysec 选项比较合适，可以保证系统崩溃时只会<strong>丢失</strong>一秒左右的数据，并且 Redis 每秒执行一次同步对服务器性能几乎没有任何影响；</p>
+</li>
+<li><p>no 选项<strong>并不能</strong>给服务器性能带来多大的提升，而且也会增加系统崩溃时数据丢失的数量。</p>
+</li>
+</ul>
+</li>
+</ol>
+<p>随着服务器写请求的增多，AOF 文件会越来越大。Redis 提供了一种将 AOF 重写的特性，能够去除 AOF 文件中的冗余写命令。</p>
+<h3 id="4、redis的淘汰策略"><a href="#4、redis的淘汰策略" class="headerlink" title="4、redis的淘汰策略"></a>4、redis的淘汰策略</h3><p>可以设置内存最大使用量，当内存使用量超出时，会施行数据淘汰策略。</p>
+<p>Reids 具体有 6 种淘汰策略：</p>
+<table>
+<thead>
+<tr>
+<th align="center">策略</th>
+<th align="center">描述</th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="center">volatile-lru</td>
+<td align="center">从已设置过期时间的数据集中挑选最近最少使用的数据淘汰</td>
+</tr>
+<tr>
+<td align="center">volatile-ttl</td>
+<td align="center">从已设置过期时间的数据集中挑选将要过期的数据淘汰</td>
+</tr>
+<tr>
+<td align="center">volatile-random</td>
+<td align="center">从已设置过期时间的数据集中任意选择数据淘汰</td>
+</tr>
+<tr>
+<td align="center">allkeys-lru</td>
+<td align="center">从所有数据集中挑选最近最少使用的数据淘汰</td>
+</tr>
+<tr>
+<td align="center">allkeys-random</td>
+<td align="center">从所有数据集中任意选择数据进行淘汰</td>
+</tr>
+<tr>
+<td align="center">noeviction</td>
+<td align="center">禁止驱逐数据</td>
+</tr>
+</tbody></table>
+<p>作为内存数据库，出于对性能和内存消耗的考虑，Redis 的淘汰算法实际实现上并非针对所有 key，而是抽样一小部分并且从中选出被淘汰的 key。</p>
+<p>使用 Redis 缓存数据时，为了提高缓存命中率，需要保证缓存数据都是热点数据。可以将内存最大使用量设置为热点数据占用的内存量，然后启用 allkeys-lru 淘汰策略，将最近最少使用的数据淘汰。</p>
+<p>Redis 4.0 引入了 volatile-lfu 和 allkeys-lfu 淘汰策略，LFU 策略通过统计访问频率，将访问频率最少的键值对淘汰。</p>
+<h3 id="5、ipv4和ipv6"><a href="#5、ipv4和ipv6" class="headerlink" title="5、ipv4和ipv6"></a>5、ipv4和ipv6</h3><p>ipv6的好处：</p>
+<ol>
+<li>一个设备一个公网 IP，不需要穿透，同城毫秒级响应，PT 使用范围 /速度增加</li>
+<li>可以接入教育网</li>
+</ol>
+<p>坏处：</p>
+<ol>
+<li>一个设备一个公网 IP（喝茶）</li>
+<li>目前很多网站 ipv6 是单通，而且默认情况下 ipv6 优先级高，所以目前很多情况下启用 ipv6 对网络体验是负优化</li>
+<li>ipv6 路由震荡得厉害，尤其出国，今天美国绕日本，明天日本绕德国，对网络体验还是负优化</li>
+</ol>
+<h3 id="6、软链接和硬链接"><a href="#6、软链接和硬链接" class="headerlink" title="6、软链接和硬链接"></a>6、软链接和硬链接</h3><blockquote>
+<p>主要是inode的一些特点和区别，inode会记录除了文件名以外所有的文件信息，包括引用数、权限、组、用户、大小等</p>
+</blockquote>
+<p>1、软链接：<code>ln -s source_file des_file</code>；硬链接：<code>ln source_file des_file</code><br>2、两者不管修改什么文件，都是全部修改，但是软/硬链接删除目标文件不影响源文件，删除源文件的话，软的会无效<br>3、inode中的引用数：硬链接两个文件都会+1，软链接不会；或者说硬链接两个维护一个inode，软链接维护两个inode<br>4、硬链接不能面向目录<br>5、硬链接不能分区，软链接可以，使用案例为将日志或者别的大文件软链接到别的硬盘上</p>
+<h3 id="7、mysql-为什么不推荐三张表以上的关联？"><a href="#7、mysql-为什么不推荐三张表以上的关联？" class="headerlink" title="7、mysql 为什么不推荐三张表以上的关联？"></a>7、mysql 为什么不推荐三张表以上的关联？</h3><p>好处：减少网络io</p>
+<p>坏处：</p>
+<p>1、不论是几个表，什么 sql，先 show index 看看索引怎么建的，再 explain 分析一波索引命中情况怎样</p>
+<p>2、如果条件限制宽泛的话，三张表关联产生的笛卡儿积非常庞大，缓存机制什么的可能扛不住啊，得用 explain 来分析一下了</p>
+<p>3、耦合高</p>
+<p>4、数据一多，服务器直接GG</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div>打赏一杯咖啡</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="vissssa 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="vissssa 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>vissssa
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="/http:/vissssa.club/posts/5c16325f.html" title="知识片段收录">http://vissssa.club/posts/5c16325f.html</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/en" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/redis/" rel="tag"># redis</a>
+              <a href="/tags/ipv4-ipv6/" rel="tag"># ipv4/ipv6</a>
+              <a href="/tags/snippets/" rel="tag"># snippets</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/e11f968c.html" rel="prev" title="python面试">
+      <i class="fa fa-chevron-left"></i> python面试
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/bd50b816.html" rel="next" title="内网穿透">
+      内网穿透 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1、redis能否代替etcd或者zookeeper"><span class="nav-number">1.</span> <span class="nav-text">1、redis能否代替etcd或者zookeeper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2、redis的使用场景"><span class="nav-number">2.</span> <span class="nav-text">2、redis的使用场景</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3、redis的持久化"><span class="nav-number">3.</span> <span class="nav-text">3、redis的持久化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4、redis的淘汰策略"><span class="nav-number">4.</span> <span class="nav-text">4、redis的淘汰策略</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5、ipv4和ipv6"><span class="nav-number">5.</span> <span class="nav-text">5、ipv4和ipv6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6、软链接和硬链接"><span class="nav-number">6.</span> <span class="nav-text">6、软链接和硬链接</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7、mysql-为什么不推荐三张表以上的关联？"><span class="nav-number">7.</span> <span class="nav-text">7、mysql 为什么不推荐三张表以上的关联？</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a href="/about/">
+    <img class="site-author-image" itemprop="image" alt="vissssa" src="https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/%E5%A4%B4%E5%83%8F%E5%8E%8B%E7%BC%A9%E7%89%88.jpg">
+  </a>
+  <p class="site-author-name" itemprop="name">vissssa</p>
+  <div class="site-description" itemprop="description">python, flask, linux, 架构, 生活, 科技</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">32</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">8</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">33</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vissssa" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vissssa" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:vissssa@163.com" title="E-Mail → mailto:vissssa@163.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/vissssa" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;vissssa" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/en" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" target="_blank">皖ICP备18020261号 </a>
+      <img src="https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/%E5%A4%87%E6%A1%88%E5%9B%BE%E6%A0%87.png" style="display: inline-block;"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=%E7%9A%96ICP%E5%A4%8718020261%E5%8F%B7" rel="external nofollow noopener noreferrer" target="_blank">1 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vissssa</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">209k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">5:49</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.0.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/06/2019 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+<script src="/js/utils.js"></script><script src="/js/motion.js"></script>
+<script src="/js/schemes/pisces.js"></script>
+<script src="/js/next-boot.js"></script>
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  <script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '1cb5d474d77189d86ba0',
+      clientSecret: '568f0c839b99394f56a213db8d26afbb12e3dad1',
+      repo: 'vissssa',
+      owner: 'vissssa',
+      admin: ['vissssa'],
+      id: '7cc61a4def956caa538efa70a40cc850',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>

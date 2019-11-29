@@ -9,6 +9,7 @@ categories:
   - Flask
 date: 2019-5-15
 description: Flask浅析系列
+abbrlink: 2662e6b2
 ---
 # 理解Flask的request上下文
 

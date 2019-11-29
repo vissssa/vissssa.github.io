@@ -6,6 +6,7 @@ categories:
   - deep
 date: 2019-5-15
 description: python的一个热点
+abbrlink: d445bba0
 ---
 ## GIL 有什么好处？
 简单来说，它在单线程的情况更快，并且在和 C 库结合时更方便，而且不用考虑线程安全问题，这也是早期 Python 最常见的应用场景和优势。

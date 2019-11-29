@@ -1,14 +1,15 @@
 ---
 title: Flask浅析-信号和Hook
-entitle: 'FLask-signals & hook'
+entitle: FLask-signals & hook
 categories: Flask
-date: 2019-11-28 11:06:00
 tags:
-    - Flask
-    - python
-    - deep
+  - Flask
+  - python
+  - deep
 keywords: Flask
 description: Flask浅析系列
+abbrlink: a287ede
+date: 2019-11-28 11:06:00
 ---
 {% post_link Flask浅析-request上下文 %}
 由于翻看源码时看到flask根目录下有个`signals.py`文件，且部分代码如下

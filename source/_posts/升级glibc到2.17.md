@@ -7,6 +7,7 @@ categories:
   - env
 date: 2019-5-15
 description: centos6的glibc版本问题
+abbrlink: e5d88922
 ---
 ```bash
 #! /bin/sh

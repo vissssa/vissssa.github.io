@@ -1,12 +1,14 @@
+---
 title: 《SQL必知必会》笔记
-entitle: 'sql'
+entitle: sql
 categories: deep
-date: 2019-06-18 13:44:00
 tags:
-    - sql
-    - deep
+  - sql
+  - deep
 keywords: sql
 description: 极客时间课程《SQL必知必会》的一些记录
+abbrlink: 8212f7ec
+date: 2019-06-18 13:44:00
 ---
 
 ### SQL功能
