@@ -12,9 +12,10 @@ description: Flask浅析系列
 abbrlink: 2662e6b2
 ---
 ### Flask浅析系列
-{% post_link Flask浅析-request上下文 %}
+{% post_link Flask浅析-request上下文 %} 
 {% post_link Flask浅析-信号和Hook %}
-
+* * *
+- - -
 # 理解Flask的request上下文
 
 request是全局变量，但request的属性总是对应当前请求的值，这是如何做到的呢？同样的还有current_app。
