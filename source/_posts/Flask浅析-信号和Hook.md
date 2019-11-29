@@ -12,8 +12,8 @@ abbrlink: a287ede
 date: 2019-11-28 11:06:00
 ---
 ### Flask浅析系列
-{% post_link Flask浅析-request上下文 %}  
-{% post_link Flask浅析-信号和Hook %}
+{% post_link Flask浅析-request上下文 %}<br/>
+{% post_link Flask浅析-信号和Hook %}<br/>
 * * *
 - - -
 由于翻看源码时看到flask根目录下有个`signals.py`文件，且部分代码如下
