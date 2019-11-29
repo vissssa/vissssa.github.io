@@ -717,7 +717,7 @@ firestore:
 # Show Views / Visitors of the website / page with busuanzi.
 # Get more information on http://ibruce.info/2015/04/04/busuanzi
 busuanzi_count:
-  enable: true
+  enable: false
   total_visitors: true
   total_visitors_icon: user
   total_views: true
@@ -860,10 +860,10 @@ pace:
 # JavaScript 3D library.
 # Dependencies: https://github.com/theme-next/theme-next-three
 three:
-  enable: true
-  three_waves: true
-  canvas_lines: true
-  canvas_sphere: true
+  enable: false
+  three_waves: false
+  canvas_lines: false
+  canvas_sphere: false
 
 # Canvas-nest
 # Dependencies: https://github.com/theme-next/theme-next-canvas-nest
