@@ -1,5 +1,4 @@
-<div align=center>
-<img src="https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/%E5%A4%B4%E5%83%8F.jpg" style="width:100px; height:100px; border-radius:50%; overflow:hidden;" div align=center />
+<img src="https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/%E5%A4%B4%E5%83%8F.jpg" width = "100" height = "100" div align=center />
 </div>
 
 ![banner](https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/wallpapers/%E5%A3%81%E7%BA%B8.jpg)
