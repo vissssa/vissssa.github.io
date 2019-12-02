@@ -5,7 +5,9 @@ tags:
   - 技巧
   - deep
 keywords: google github 搜索技巧
-date: 2019-12-2 15:03:00
+description: Flask浅析系列
+abbrlink: ce9335e0
+date: 2019-12-02 15:03:00
 ---
 > 比较简单且直接的搜索方式就是敲上几个关键词，然后回车，等待搜索引擎的反馈
 >
