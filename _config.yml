@@ -16,7 +16,8 @@ timezone: 'Asia/Shanghai'
 url: http://vissssa.club
 root: /
 # permalink: :year/:month/:day/:title/
-permalink: :year/:title/
+# permalink: :year/:title/
+permalink: :category/:title
 # permalink: posts/:abbrlink
 # abbrlink:
   # alg: crc32  # 算法：crc16(default) and crc32
