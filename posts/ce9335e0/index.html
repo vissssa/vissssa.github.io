@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/vissssa_favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/vissssa_favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/vissssa_favicon.ico">
+  <link rel="mask-icon" href="/images/vissssa_favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://vissssa.club').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: true,
+    pangu: true,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="比较简单且直接的搜索方式就是敲上几个关键词，然后回车，等待搜索引擎的反馈 但是这样的搜索是比较低效且浪费搜索引擎的强大功能的，为了不辜负google和github的好意， 我们需要了解并使用高阶点的搜索技巧。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="google和github的搜索技巧">
+<meta property="og:url" content="http://vissssa.club/posts/ce9335e0/index.html">
+<meta property="og:site_name" content="vissssa">
+<meta property="og:description" content="比较简单且直接的搜索方式就是敲上几个关键词，然后回车，等待搜索引擎的反馈 但是这样的搜索是比较低效且浪费搜索引擎的强大功能的，为了不辜负google和github的好意， 我们需要了解并使用高阶点的搜索技巧。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2019-12-02T07:03:00.000Z">
+<meta property="article:modified_time" content="2020-02-28T03:33:18.158Z">
+<meta property="article:author" content="vissssa">
+<meta property="article:tag" content="google github 搜索技巧">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://vissssa.club/posts/ce9335e0/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>google和github的搜索技巧 | vissssa</title>
+  
+
+
+  <script pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6c62fd314d902c62945f06eeb436ce1f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">vissssa</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">我的一些笔记，人生感悟、读后感、开箱评测等</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/vissssa" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="external nofollow noopener noreferrer" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vissssa.club/posts/ce9335e0/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/%E5%A4%B4%E5%83%8F%E5%8E%8B%E7%BC%A9%E7%89%88.jpg">
+      <meta itemprop="name" content="vissssa">
+      <meta itemprop="description" content="python, flask, linux, 架构, 生活, 科技">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vissssa">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          google和github的搜索技巧
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-02 15:03:00" itemprop="dateCreated datePublished" datetime="2019-12-02T15:03:00+08:00">2019-12-02</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-28 11:33:18" itemprop="dateModified" datetime="2020-02-28T11:33:18+08:00">2020-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%90%9C%E7%B4%A2%E6%8A%80%E5%B7%A7/" itemprop="url" rel="index">
+                    <span itemprop="name">搜索技巧</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>2.5k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>4 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <blockquote>
+<p>比较简单且直接的搜索方式就是敲上几个关键词，然后回车，等待搜索引擎的反馈</p>
+<p>但是这样的搜索是比较低效且浪费搜索引擎的强大功能的，为了不辜负google和github的好意，</p>
+<p>我们需要了解并使用高阶点的搜索技巧。</p>
+</blockquote>
+<a id="more"></a>
+<h2 id="Google"><a href="#Google" class="headerlink" title="Google"></a>Google</h2><p>google的搜索技巧不太复杂，可能是因为本来结果就已经足够的好，但是有时候我们需要更<code>精确</code>或者<code>特殊</code>的结果，所以来看看吧</p>
+<blockquote>
+<p>baidu的搜索技巧基本和google一样，个人觉得没什么不好，起码可以节省学习成本(手动滑稽)</p>
+</blockquote>
+<blockquote>
+<p>运算符后不要带空格</p>
+</blockquote>
+<ol>
+<li><p>善用标签栏，比如切换到图片，只看最近一个月的结果等</p>
+</li>
+<li><p>其实我们可以使用google搜索来代替自建站内搜索，只需要使用<code>site:vissssa.club  xxx</code>即可，他只会显示该网站的结果，比较适用于搜索github或者stackoverflow等网站</p>
+</li>
+<li><p>精确匹配，使用<code>&quot;flask python&quot;</code>，可以确保flask出现在python之前，去掉空格则会只展示<code>flaskpython</code>的结果</p>
+</li>
+<li><p>数字区间<code>20..30</code>之间的所有数字</p>
+</li>
+<li><p>相关网站<code>related:v2ex.com</code></p>
+</li>
+<li><p><strong>重要且强大的功能</strong>，google会自带缓存，使用<code>cache:{url}</code>可以查看该页面的缓存，当遇到搜索结果404的时候，可以使用该<code>终结技</code>来试试，有可能能有意外收获</p>
+</li>
+<li><p>合理利用<code>与/或</code>，默认是使用的<code>与</code>，但当我们需要<code>或</code>时，只需要在关键词中间加上<code>张宇 OR 张学友</code>(大写)即可</p>
+</li>
+<li><p><code>+ - ~</code>有的时候，google会选择性的忽略一些单词，比如“and”、“the，”、“where”、“how”、“what”、“or”等，这时候我们可以使用<code>+how</code>来强调这个单词是我需要的，有时候，我们需要忽略某个结果，使用<code>apple -mobile</code>来过滤掉苹果手机，还有时候，我们需要获取某个单词的近义词<code>~elderly</code>，所得到的页面就会不仅是包括“elderly”这个词，还会有包括“senior”、“older”、“aged”等等词的页面，对了可以使用组合技<code>~elderly -elderly</code>来排除掉你已经知道的结果，只获取近义词</p>
+</li>
+<li><p>一个运算符列表（<strong>注意</strong>：把all去掉，即<code>allinanchor</code> –&gt; <code>inanchor</code>就是单关键词搜索）</p>
+<table>
+<thead>
+<tr>
+<th align="left">运算符</th>
+<th align="left"><strong>用途</strong></th>
+<th align="left"><strong>用法</strong></th>
+</tr>
+</thead>
+<tbody><tr>
+<td align="left">allinanchor</td>
+<td align="left">限制搜索的词语是网页中链接内包含的关键词（可使用多个关键词）</td>
+<td align="left">allinanchor:keyword1 keyword2</td>
+</tr>
+<tr>
+<td align="left">allintext</td>
+<td align="left">限制搜索的词语是网页内文包含的关键词（可使用多个关键词）</td>
+<td align="left">allintext:keyword1 keyword2</td>
+</tr>
+<tr>
+<td align="left">allintitle</td>
+<td align="left">限制搜索的词语是网页标题中包含的关键词（可使用多个关键词）</td>
+<td align="left">allintitle:keyword1 keyword2</td>
+</tr>
+<tr>
+<td align="left">allinurl</td>
+<td align="left">限制搜索的词语是网页网址中包含的关键词（可使用多个关键词）</td>
+<td align="left">allinurl:keyword1 keyword2</td>
+</tr>
+<tr>
+<td align="left">filetype</td>
+<td align="left">限制所搜索的文件一个特定的格式</td>
+<td align="left">filetype:pdf</td>
+</tr>
+<tr>
+<td align="left">site</td>
+<td align="left">限制所进行的搜索在指定的域名或网站内</td>
+<td align="left">site:domain</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<h2 id="Github"><a href="#Github" class="headerlink" title="Github"></a>Github</h2><blockquote>
+<p>github的搜索相对比较复杂，因为涉及到一些运算对象的变化，比如几大范围(title, description, readme等)，和一些stars、趋势的指标，但是能更方便筛选出你需要的repo</p>
+</blockquote>
+<blockquote>
+<p>官方文档在<a href="https://help.github.com/cn/github/searching-for-information-on-github" target="_blank" rel="external nofollow noopener noreferrer">https://help.github.com/cn/github/searching-for-information-on-github</a></p>
+<p>这里我主要记录一些比较常用的方法</p>
+</blockquote>
+<ol>
+<li><p><strong>关键词搜索</strong>， 通过repo_name、description、readme来精确筛选，比如在description中搜索微服务回避其他的更好，语法为<code>in:description</code></p>
+</li>
+<li><p>搜索repo的一些限定符，用法均为<code>user:vissssa</code></p>
+<table>
+<thead>
+<tr>
+<th>限定符</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>user:USERNAME</td>
+<td><a href="https://github.com/search?q=user%3Adefunkt+forks%3A>%3D100&type=Repositories" target="_blank" rel="external nofollow noopener noreferrer"><strong>user:defunkt forks:&gt;100</strong></a> 匹配来自 @defunkt、拥有超过 100 复刻的仓库。</td>
+</tr>
+<tr>
+<td>org:ORGNAME</td>
+<td><a href="https://github.com/search?utf8=✓&q=org%3Agithub&type=Repositories" target="_blank" rel="external nofollow noopener noreferrer"><strong>org:github</strong></a> 匹配来自 GitHub 的仓库。</td>
+</tr>
+<tr>
+<td>followers:<em>n</em></td>
+<td><a href="https://github.com/search?q=node+followers%3A>%3D10000" target="_blank" rel="external nofollow noopener noreferrer"><strong>node followers:&gt;=10000</strong></a> 匹配拥有 10,000 或更多关注者并且提及 “node” 一词的仓库。<br><a href="https://github.com/search?q=styleguide+linter+followers%3A1..10&type=Repositories" target="_blank" rel="external nofollow noopener noreferrer"><strong>styleguide linter followers:1..10</strong></a> 匹配拥有 1 到 10 个关注者并且提及 “styleguide linter” 一词的的仓库。</td>
+</tr>
+<tr>
+<td>forks:<em>n</em></td>
+<td><a href="https://github.com/search?q=forks%3A>%3D205&type=Repositories" target="_blank" rel="external nofollow noopener noreferrer"><strong>forks:&gt;=205</strong></a> 匹配具有至少 205 个fork的仓库。</td>
+</tr>
+<tr>
+<td>stars:<em>n</em></td>
+<td><a href="https://github.com/search?q=stars%3A10..20+size%3A<1000&type=Repositories" target="_blank" rel="external nofollow noopener noreferrer"><strong>stars:10..20</strong></a> 匹配具有 10 到 20 个星号 的仓库。</td>
+</tr>
+<tr>
+<td>created:<em>YYYY-MM-DD</em></td>
+<td><a href="https://github.com/search?q=webos+created%3A<2011-01-01&type=Repositories" target="_blank" rel="external nofollow noopener noreferrer"><strong>webos created:&lt;2011-01-01</strong></a> 匹配具有 “webos” 字样、在 2011 年之前创建的仓库。</td>
+</tr>
+<tr>
+<td>pushed:<em>YYYY-MM-DD</em></td>
+<td><a href="https://github.com/search?utf8=✓&q=css+pushed%3A>2013-02-01&type=Repositories" target="_blank" rel="external nofollow noopener noreferrer"><strong>css pushed:&gt;2013-02-01</strong></a> 匹配具有 “css” 字样、在 2013 年 1 月之后收到推送的仓库。</td>
+</tr>
+<tr>
+<td>language:<em>LANGUAGE</em></td>
+<td><a href="https://github.com/search?q=rails+language%3Ajavascript&type=Repositories" target="_blank" rel="external nofollow noopener noreferrer"><strong>rails language:javascript</strong></a> 匹配具有 “rails” 字样、以 JavaScript 编写的仓库。</td>
+</tr>
+</tbody></table>
+</li>
+<li><p>还可以根据issue、pr、commit和主题(topic)来搜索，但是比较少见，就不提了</p>
+</li>
+<li><p>在代码中搜索</p>
+<table>
+<thead>
+<tr>
+<th>限定符</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>in:file</td>
+<td><a href="https://github.com/search?q=octocat+in%3Afile&type=Code" target="_blank" rel="external nofollow noopener noreferrer"><strong>octocat in:file</strong></a> 匹配文件内容中出现 “octocat” 的代码。</td>
+</tr>
+<tr>
+<td>in:path</td>
+<td><a href="https://github.com/search?q=octocat+in%3Apath&type=Code" target="_blank" rel="external nofollow noopener noreferrer"><strong>octocat in:path</strong></a> 匹配文件路径中出现 “octocat” 的代码。<br><a href="https://github.com/search?q=octocat+in%3Afile%2Cpath&type=Code" target="_blank" rel="external nofollow noopener noreferrer"><strong>octocat in:file,path</strong></a> 匹配文件内容或文件路径中出现 “octocat” 的代码。</td>
+</tr>
+<tr>
+<td>path:<em>PATH/TO/DIRECTORY</em></td>
+<td><a href="https://github.com/search?q=console+path%3A" target="_blank" rel="external nofollow noopener noreferrer" app%2fpublic"+language%3ajavascript&type="Code" "><strong>console path:app/public</strong></a>匹配目录中的代码</td>
+</tr>
+<tr>
+<td>language:<em>LANGUAGE</em></td>
+<td><a href="https://github.com/search?q=display+language%3Ascss&type=Code" target="_blank" rel="external nofollow noopener noreferrer"><strong>display language:scss</strong></a> 匹配标记为 SCSS 且含有 “display” 字样的代码。</td>
+</tr>
+<tr>
+<td>filename:<em>FILENAME</em></td>
+<td><a href="https://github.com/search?utf8=✓&q=filename%3Alinguist&type=Code" target="_blank" rel="external nofollow noopener noreferrer"><strong>filename:linguist</strong></a> 匹配名为 “linguist” 的文件。</td>
+</tr>
+<tr>
+<td>extension:<em>EXTENSION</em></td>
+<td>extension:txt匹配文件扩展名</td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+
+    </div>
+
+    
+    
+    
+      
+  <div class="popular-posts-header">相关文章</div>
+  <ul class="popular-posts">
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/2662e6b2/" rel="bookmark">Flask浅析-request上下文</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/a287ede/" rel="bookmark">Flask浅析-信号和Hook</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/8212f7ec/" rel="bookmark">《SQL必知必会》笔记</a></div>
+    </li>
+    <li class="popular-posts-item">
+      <div class="popular-posts-title"><a href="/posts/bd50b816/" rel="bookmark">内网穿透</a></div>
+    </li>
+  </ul>
+
+        <div class="reward-container">
+  <div>打赏一杯咖啡</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="vissssa 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="vissssa 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>vissssa
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://vissssa.club/posts/ce9335e0/" title="google和github的搜索技巧">http://vissssa.club/posts/ce9335e0/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/en" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/deep/" rel="tag"># deep</a>
+              <a href="/tags/%E6%8A%80%E5%B7%A7/" rel="tag"># 技巧</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/a287ede/" rel="prev" title="Flask浅析-信号和Hook">
+      <i class="fa fa-chevron-left"></i> Flask浅析-信号和Hook
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/posts/a667b194/" rel="next" title="mock与单元测试">
+      mock与单元测试 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Google"><span class="nav-number">1.</span> <span class="nav-text">Google</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Github"><span class="nav-number">2.</span> <span class="nav-text">Github</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a href="/about/">
+    <img class="site-author-image" itemprop="image" alt="vissssa" src="https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/%E5%A4%B4%E5%83%8F%E5%8E%8B%E7%BC%A9%E7%89%88.jpg">
+  </a>
+  <p class="site-author-name" itemprop="name">vissssa</p>
+  <div class="site-description" itemprop="description">python, flask, linux, 架构, 生活, 科技</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vissssa" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vissssa" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:vissssa@163.com" title="E-Mail → mailto:vissssa@163.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/vissssa" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;vissssa" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/en" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" target="_blank">皖ICP备18020261号 </a>
+      <img src="https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/%E5%A4%87%E6%A1%88%E5%9B%BE%E6%A0%87.png" style="display: inline-block;"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=%E7%9A%96ICP%E5%A4%8718020261%E5%8F%B7" rel="external nofollow noopener noreferrer" target="_blank">1 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vissssa</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">222k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:09</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/06/2019 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '1cb5d474d77189d86ba0',
+      clientSecret: '568f0c839b99394f56a213db8d26afbb12e3dad1',
+      repo: 'vissssa',
+      owner: 'vissssa',
+      admin: ['vissssa'],
+      id: '173aa298f62c18d8d1b9a8ad9df045de',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>

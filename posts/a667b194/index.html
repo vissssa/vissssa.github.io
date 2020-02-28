@@ -1,0 +1,778 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/vissssa_favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/vissssa_favicon.ico">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/vissssa_favicon.ico">
+  <link rel="mask-icon" href="/images/vissssa_favicon.ico" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Monda:300,300italic,400,400italic,700,700italic|Roboto Slab:300,300italic,400,400italic,700,700italic|PT Mono:300,300italic,400,400italic,700,700italic&display=swap&subset=latin,latin-ext">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+  <link rel="stylesheet" href="/lib/pace/pace-theme-flash.min.css">
+  <script src="/lib/pace/pace.min.js"></script>
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://vissssa.club').hostname,
+    root: '/',
+    scheme: 'Gemini',
+    version: '7.5.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"post","offset":12,"onmobile":false},
+    copycode: {"enable":true,"show_result":true,"style":"mac"},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":true},
+    bookmark: {"enable":false,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: true,
+    pangu: true,
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    sidebarPadding: 40
+  };
+</script>
+
+  <meta name="description" content="本文讲述的是 Python 中 Mock 的使用。 如何执行单元测试而不用考验你的耐心很多时候，我们编写的软件会直接与那些被标记为 “垃圾” 的服务交互。用外行人的话说：服务对我们的应用程序很重要，但是我们想要的是交互，而不是那些不想要的副作用，这里的 “不想要” 是在自动化测试运行的语境中说的。例如：我们正在写一个社交 app，并且想要测试一下 “发布到 Facebook” 的新功能，但是不想每">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mock与单元测试">
+<meta property="og:url" content="http://vissssa.club/posts/a667b194/index.html">
+<meta property="og:site_name" content="vissssa">
+<meta property="og:description" content="本文讲述的是 Python 中 Mock 的使用。 如何执行单元测试而不用考验你的耐心很多时候，我们编写的软件会直接与那些被标记为 “垃圾” 的服务交互。用外行人的话说：服务对我们的应用程序很重要，但是我们想要的是交互，而不是那些不想要的副作用，这里的 “不想要” 是在自动化测试运行的语境中说的。例如：我们正在写一个社交 app，并且想要测试一下 “发布到 Facebook” 的新功能，但是不想每">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="https://p0.ssl.qhimg.com/t01a8f8f4eb02c51190.png">
+<meta property="article:published_time" content="2019-12-22T16:00:00.000Z">
+<meta property="article:modified_time" content="2020-02-28T03:33:18.158Z">
+<meta property="article:author" content="vissssa">
+<meta property="article:tag" content="test">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://p0.ssl.qhimg.com/t01a8f8f4eb02c51190.png">
+
+<link rel="canonical" href="http://vissssa.club/posts/a667b194/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true,
+    isPage: false,
+    isArchive: false
+  };
+</script>
+
+  <title>mock与单元测试 | vissssa</title>
+  
+
+
+  <script pjax>
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6c62fd314d902c62945f06eeb436ce1f";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">vissssa</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+        <h1 class="site-subtitle" itemprop="description">我的一些笔记，人生感悟、读后感、开箱评测等</h1>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-fw fa-home"></i>首页</a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section"><i class="fa fa-fw fa-user"></i>关于</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section"><i class="fa fa-fw fa-tags"></i>标签</a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section"><i class="fa fa-fw fa-th"></i>分类</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-fw fa-archive"></i>归档</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger"><i class="fa fa-search fa-fw"></i>搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none" placeholder="搜索..." spellcheck="false" type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <div class="reading-progress-bar"></div>
+
+  <a href="https://github.com/vissssa" class="github-corner" title="Follow me on GitHub" aria-label="Follow me on GitHub" rel="external nofollow noopener noreferrer" target="_blank"><svg width="80" height="80" viewbox="0 0 250 250" aria-hidden="true"><path d="M0,0 L115,115 L130,115 L142,142 L250,250 L250,0 Z"/><path d="M128.3,109.0 C113.8,99.7 119.0,89.6 119.0,89.6 C122.0,82.7 120.5,78.6 120.5,78.6 C119.2,72.0 123.4,76.3 123.4,76.3 C127.3,80.9 125.5,87.3 125.5,87.3 C122.9,97.6 130.6,101.9 134.4,103.2" fill="currentColor" style="transform-origin: 130px 106px;" class="octo-arm"/><path d="M115.0,115.0 C114.9,115.1 118.7,116.5 119.8,115.4 L133.7,101.6 C136.9,99.2 139.9,98.4 142.2,98.6 C133.8,88.0 127.5,74.4 143.8,58.0 C148.5,53.4 154.0,51.2 159.7,51.0 C160.3,49.4 163.2,43.6 171.4,40.1 C171.4,40.1 176.1,42.5 178.8,56.2 C183.1,58.6 187.2,61.8 190.9,65.4 C194.5,69.0 197.7,73.2 200.1,77.6 C213.8,80.2 216.3,84.9 216.3,84.9 C212.7,93.1 206.9,96.0 205.4,96.6 C205.1,102.4 203.0,107.8 198.3,112.5 C181.9,128.9 168.3,122.5 157.7,114.1 C157.9,116.9 156.7,120.9 152.7,124.9 L141.0,136.5 C139.8,137.7 141.6,141.9 141.8,141.8 Z" fill="currentColor" class="octo-body"/></svg></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://vissssa.club/posts/a667b194/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/%E5%A4%B4%E5%83%8F%E5%8E%8B%E7%BC%A9%E7%89%88.jpg">
+      <meta itemprop="name" content="vissssa">
+      <meta itemprop="description" content="python, flask, linux, 架构, 生活, 科技">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="vissssa">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          mock与单元测试
+        </h2>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-12-23 00:00:00" itemprop="dateCreated datePublished" datetime="2019-12-23T00:00:00+08:00">2019-12-23</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-28 11:33:18" itemprop="dateModified" datetime="2020-02-28T11:33:18+08:00">2020-02-28</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/deep/" itemprop="url" rel="index">
+                    <span itemprop="name">deep</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span class="post-meta-item" title="阅读次数" id="busuanzi_container_page_pv" style="display: none;">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span id="busuanzi_value_page_pv"></span>
+            </span><br>
+            <span class="post-meta-item" title="本文字数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+                <span class="post-meta-item-text">本文字数：</span>
+              <span>9.8k</span>
+            </span>
+            <span class="post-meta-item" title="阅读时长">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+                <span class="post-meta-item-text">阅读时长 &asymp;</span>
+              <span>16 分钟</span>
+            </span>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>本文讲述的是 Python 中 Mock 的使用。</p>
+<h3 id="如何执行单元测试而不用考验你的耐心"><a href="#如何执行单元测试而不用考验你的耐心" class="headerlink" title="如何执行单元测试而不用考验你的耐心"></a><a href="#如何执行单元测试而不用考验你的耐心"></a>如何执行单元测试而不用考验你的耐心</h3><p>很多时候，我们编写的软件会直接与那些被标记为 “垃圾” 的服务交互。用外行人的话说：服务对我们的应用程序很重要，但是我们想要的是交互，而不是那些不想要的副作用，这里的 “不想要” 是在自动化测试运行的语境中说的。例如：我们正在写一个社交 app，并且想要测试一下 “发布到 Facebook” 的新功能，但是不想每次运行测试集的时候真的发布到 Facebook。</p>
+<a id="more"></a>
+<p>Python 的 <code>unittest</code> 库包含了一个名为 <code>unittest.mock</code> 或者可以称之为依赖的子包，简称为 <code>mock</code> —— 其提供了极其强大和有用的方法，通过它们可以模拟（mock）并去除那些我们不希望的副作用。</p>
+<p><a href="https://camo.githubusercontent.com/facb31f7bfe115c5e687d6c27e996ac0a9ff19b9/68747470733a2f2f6173736574732e746f7074616c2e696f2f75706c6f6164732f626c6f672f696d6167652f3235322f746f7074616c2d626c6f672d696d6167652d313338393039303334363431352e706e67" target="_blank" rel="external nofollow noopener noreferrer"><img alt data-src="https://p0.ssl.qhimg.com/t01a8f8f4eb02c51190.png"></a></p>
+<p><em>注意：<code>mock</code> <a href="http://www.python.org/dev/peps/pep-0417/" target="_blank" rel="external nofollow noopener noreferrer">最近被收录</a>到了 Python 3.3 的标准库中；先前发布的版本必须通过 <a href="https://pypi.python.org/pypi/mock" target="_blank" rel="external nofollow noopener noreferrer">PyPI</a> 下载 Mock 库。</em></p>
+<h3 id="恐惧系统调用"><a href="#恐惧系统调用" class="headerlink" title="恐惧系统调用"></a><a href="#恐惧系统调用"></a>恐惧系统调用</h3><p>再举另一个例子，我们在接下来的部分都会用到它，这是就是<strong>系统调用</strong>。不难发现，这些系统调用都是主要的模拟对象：无论你是正在写一个可以弹出 CD 驱动器的脚本，还是一个用来删除 /tmp 下过期的缓存文件的 Web 服务，或者一个绑定到 TCP 端口的 socket 服务器，这些调用都是在你的单元测试上下文中不希望产生的副作用。</p>
+<p>作为一个开发者，你需要更关心你的库是否成功地调用了一个可以弹出 CD 的系统函数（使用了正确的参数等等），而不是切身经历 CD 托盘每次在测试执行的时候都打开了。（或者更糟糕的是，弹出了很多次，在一个单元测试运行期间多个测试都引用了弹出代码！）</p>
+<p>同样，保持单元测试的效率和性能意味着需要让如此多的 “缓慢代码” 远离自动测试，比如文件系统和网络访问。</p>
+<p>对于第一个例子来说，我们要从原始形式换成使用 <code>mock</code> 重构一个标准 Python 测试用例。我们会演示如何使用 mock 写一个测试用例，使我们的测试更加智能、快速，并展示更多关于我们软件的工作原理。</p>
+<h3 id="一个简单的删除函数"><a href="#一个简单的删除函数" class="headerlink" title="一个简单的删除函数"></a><a href="#一个简单的删除函数"></a>一个简单的删除函数</h3><p>我们都有过需要从文件系统中一遍又一遍的删除文件的时候，因此，让我们在 Python 中写一个可以使我们的脚本更加轻易完成此功能的函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line">import os</span><br><span class="line"></span><br><span class="line">def rm(filename):</span><br><span class="line">    os.remove(filename)</span><br></pre></td></tr></table></figure>
+
+<p>很明显，我们的 <code>rm</code> 方法此时无法提供比 <code>os.remove</code> 方法更多的相关功能，但我们可以在这里添加更多的功能，使我们的基础代码逐步改善。</p>
+<p>让我们写一个传统的测试用例，即，没有使用 <code>mock</code>：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">from mymodule import rm</span><br><span class="line"></span><br><span class="line">import os.path</span><br><span class="line">import tempfile</span><br><span class="line">import unittest</span><br><span class="line"></span><br><span class="line">class RmTestCase(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    tmpfilepath &#x3D; os.path.join(tempfile.gettempdir(), &quot;tmp-testfile&quot;)</span><br><span class="line"></span><br><span class="line">    def setUp(self):</span><br><span class="line">        with open(self.tmpfilepath, &quot;wb&quot;) as f:</span><br><span class="line">            f.write(&quot;Delete me!&quot;)</span><br><span class="line"></span><br><span class="line">    def test_rm(self):</span><br><span class="line">        </span><br><span class="line">        rm(self.tmpfilepath)</span><br><span class="line">        </span><br><span class="line">        self.assertFalse(os.path.isfile(self.tmpfilepath), &quot;Failed to remove the file.&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>我们的测试用例相当简单，但是在它每次运行的时候，它都会创建一个临时文件并且随后删除。此外，我们没有办法测试我们的 <code>rm</code> 方法是否正确地将我们的参数向下传递给 <code>os.remove</code> 调用。我们可以基于以上的测试_认为_它做到了，但还有很多需要改进的地方。</p>
+<h4 id="使用-Mock-重构"><a href="#使用-Mock-重构" class="headerlink" title="使用 Mock 重构"></a><a href="#使用-mock-重构"></a>使用 Mock 重构</h4><p>让我们使用 mock 重构我们的测试用例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">from mymodule import rm</span><br><span class="line"></span><br><span class="line">import mock</span><br><span class="line">import unittest</span><br><span class="line"></span><br><span class="line">class RmTestCase(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    @mock.patch(&#39;mymodule.os&#39;)</span><br><span class="line">    def test_rm(self, mock_os):</span><br><span class="line">        rm(&quot;any path&quot;)</span><br><span class="line">        </span><br><span class="line">        mock_os.remove.assert_called_with(&quot;any path&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>使用这些重构，我们从根本上改变了测试用例的操作方式。现在，我们有一个可以用于验证其他功能的内部对象。</p>
+<h5 id="潜在陷阱"><a href="#潜在陷阱" class="headerlink" title="潜在陷阱"></a><a href="#潜在陷阱"></a>潜在陷阱</h5><p>第一件需要注意的事情就是，我们使用了 <code>mock.patch</code> 方法装饰器，用于模拟位于 <code>mymodule.os</code> 的对象，并且将 mock 注入到我们的测试用例方法。那么只是模拟 <code>os</code> 本身，而不是 <code>mymodule.os</code> 下 <code>os</code> 的引用（LCTT 译注：注意 [<code>@mock.patch](mailto:%60@mock.patch)(&#39;mymodule.os&#39;)</code>便是模拟<code>mymodule.os</code>下的<code>os</code>），会不会更有意义呢？</p>
+<p>当然，当涉及到导入和管理模块，Python 的用法就像蛇一样灵活。在运行时，<code>mymodule</code> 模块有它自己的被导入到本模块局部作用域的 <code>os</code>。因此，如果我们模拟 <code>os</code>，我们是看不到 mock 在 <code>mymodule</code> 模块中的模仿作用的。</p>
+<p>这句话需要深刻地记住：</p>
+<blockquote>
+<p>模拟一个东西要看它用在何处，而不是来自哪里。</p>
+</blockquote>
+<p>如果你需要为 <code>myproject.app.MyElaborateClass</code> 模拟 <code>tempfile</code> 模块，你可能需要将 mock 用于 <code>myproject.app.tempfile</code>，而其他模块保持自己的导入。</p>
+<p>先将那个陷阱放一边，让我们继续模拟。</p>
+<h4 id="向-‘rm’-中加入验证"><a href="#向-‘rm’-中加入验证" class="headerlink" title="向 ‘rm’ 中加入验证"></a><a href="#向-rm-中加入验证"></a>向 ‘rm’ 中加入验证</h4><p>之前定义的 rm 方法相当的简单。在盲目地删除之前，我们倾向于验证一个路径是否存在，并验证其是否是一个文件。让我们重构 rm 使其变得更加智能：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#!&#x2F;usr&#x2F;bin&#x2F;env python</span><br><span class="line"># -*- coding: utf-8 -*-</span><br><span class="line"></span><br><span class="line">import os</span><br><span class="line">import os.path</span><br><span class="line"></span><br><span class="line">def rm(filename):</span><br><span class="line">    if os.path.isfile(filename):</span><br><span class="line">        os.remove(filename)</span><br></pre></td></tr></table></figure>
+
+<p>很好。现在，让我们调整测试用例来保持测试的覆盖率。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">from mymodule import rm</span><br><span class="line"></span><br><span class="line">import mock</span><br><span class="line">import unittest</span><br><span class="line"></span><br><span class="line">class RmTestCase(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    @mock.patch(&#39;mymodule.os.path&#39;)</span><br><span class="line">    @mock.patch(&#39;mymodule.os&#39;)</span><br><span class="line">    def test_rm(self, mock_os, mock_path):</span><br><span class="line">        </span><br><span class="line">        mock_path.isfile.return_value &#x3D; False</span><br><span class="line"></span><br><span class="line">        rm(&quot;any path&quot;)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        self.assertFalse(mock_os.remove.called, &quot;Failed to not remove the file if not present.&quot;)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        mock_path.isfile.return_value &#x3D; True</span><br><span class="line"></span><br><span class="line">        rm(&quot;any path&quot;)</span><br><span class="line"></span><br><span class="line">        mock_os.remove.assert_called_with(&quot;any path&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>我们的测试用例完全改变了。现在我们可以在没有任何副作用的情况下核实并验证方法的内部功能。</p>
+<h4 id="将文件删除作为服务"><a href="#将文件删除作为服务" class="headerlink" title="将文件删除作为服务"></a><a href="#将文件删除作为服务"></a>将文件删除作为服务</h4><p>到目前为止，我们只是将 mock 应用在函数上，并没应用在需要传递参数的对象和实例的方法上。我们现在开始涵盖对象的方法。</p>
+<p>首先，我们将 <code>rm</code> 方法重构成一个服务类。实际上将这样一个简单的函数转换成一个对象，在本质上这不是一个合理的需求，但它能够帮助我们了解 <code>mock</code> 的关键概念。让我们开始重构：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import os.path</span><br><span class="line"></span><br><span class="line">class RemovalService(object):</span><br><span class="line">    &quot;&quot;&quot;A service for removing objects from the filesystem.&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    def rm(filename):</span><br><span class="line">        if os.path.isfile(filename):</span><br><span class="line">            os.remove(filename)</span><br></pre></td></tr></table></figure>
+
+<p>你会注意到我们的测试用例没有太大变化：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">from mymodule import RemovalService</span><br><span class="line"></span><br><span class="line">import mock</span><br><span class="line">import unittest</span><br><span class="line"></span><br><span class="line">class RemovalServiceTestCase(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    @mock.patch(&#39;mymodule.os.path&#39;)</span><br><span class="line">    @mock.patch(&#39;mymodule.os&#39;)</span><br><span class="line">    def test_rm(self, mock_os, mock_path):</span><br><span class="line">        </span><br><span class="line">        reference &#x3D; RemovalService()</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        mock_path.isfile.return_value &#x3D; False</span><br><span class="line"></span><br><span class="line">        reference.rm(&quot;any path&quot;)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        self.assertFalse(mock_os.remove.called, &quot;Failed to not remove the file if not present.&quot;)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        mock_path.isfile.return_value &#x3D; True</span><br><span class="line"></span><br><span class="line">        reference.rm(&quot;any path&quot;)</span><br><span class="line"></span><br><span class="line">        mock_os.remove.assert_called_with(&quot;any path&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>很好，我们知道 <code>RemovalService</code> 会如预期般的工作。接下来让我们创建另一个服务，将 <code>RemovalService</code> 声明为它的一个依赖：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">import os</span><br><span class="line">import os.path</span><br><span class="line"></span><br><span class="line">class RemovalService(object):</span><br><span class="line">    &quot;&quot;&quot;A service for removing objects from the filesystem.&quot;&quot;&quot;</span><br><span class="line"></span><br><span class="line">    def rm(self, filename):</span><br><span class="line">        if os.path.isfile(filename):</span><br><span class="line">            os.remove(filename)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class UploadService(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self, removal_service):</span><br><span class="line">        self.removal_service &#x3D; removal_service</span><br><span class="line"></span><br><span class="line">    def upload_complete(self, filename):</span><br><span class="line">        self.removal_service.rm(filename)</span><br></pre></td></tr></table></figure>
+
+<p>因为我们的测试覆盖了 <code>RemovalService</code>，因此我们不会对我们测试用例中 <code>UploadService</code> 的内部函数 <code>rm</code> 进行验证。相反，我们将调用 <code>UploadService</code> 的 <code>RemovalService.rm</code> 方法来进行简单测试（当然没有其他副作用），我们通过之前的测试用例便能知道它可以正确地工作。</p>
+<p>这里有两种方法来实现测试：</p>
+<ol>
+<li>模拟 RemovalService.rm 方法本身。</li>
+<li>在 UploadService 的构造函数中提供一个模拟实例。</li>
+</ol>
+<p>因为这两种方法都是单元测试中非常重要的方法，所以我们将同时对这两种方法进行回顾。</p>
+<h5 id="方法-1：模拟实例的方法"><a href="#方法-1：模拟实例的方法" class="headerlink" title="方法 1：模拟实例的方法"></a><a href="#方法-1模拟实例的方法"></a>方法 1：模拟实例的方法</h5><p><code>mock</code> 库有一个特殊的方法装饰器，可以模拟对象实例的方法和属性，即 [<code>@mock.patch.object](mailto:%60@mock.patch.object) decorator</code> 装饰器：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">from mymodule import RemovalService, UploadService</span><br><span class="line"></span><br><span class="line">import mock</span><br><span class="line">import unittest</span><br><span class="line"></span><br><span class="line">class RemovalServiceTestCase(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    @mock.patch(&#39;mymodule.os.path&#39;)</span><br><span class="line">    @mock.patch(&#39;mymodule.os&#39;)</span><br><span class="line">    def test_rm(self, mock_os, mock_path):</span><br><span class="line">        </span><br><span class="line">        reference &#x3D; RemovalService()</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        mock_path.isfile.return_value &#x3D; False</span><br><span class="line"></span><br><span class="line">        reference.rm(&quot;any path&quot;)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        self.assertFalse(mock_os.remove.called, &quot;Failed to not remove the file if not present.&quot;)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        mock_path.isfile.return_value &#x3D; True</span><br><span class="line"></span><br><span class="line">        reference.rm(&quot;any path&quot;)</span><br><span class="line"></span><br><span class="line">        mock_os.remove.assert_called_with(&quot;any path&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class UploadServiceTestCase(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    @mock.patch.object(RemovalService, &#39;rm&#39;)</span><br><span class="line">    def test_upload_complete(self, mock_rm):</span><br><span class="line">        </span><br><span class="line">        removal_service &#x3D; RemovalService()</span><br><span class="line">        reference &#x3D; UploadService(removal_service)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        reference.upload_complete(&quot;my uploaded file&quot;)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        mock_rm.assert_called_with(&quot;my uploaded file&quot;)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        removal_service.rm.assert_called_with(&quot;my uploaded file&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>非常棒！我们验证了 <code>UploadService</code> 成功调用了我们实例的 <code>rm</code> 方法。你是否注意到一些有趣的地方？这种修补机制（patching mechanism）实际上替换了我们测试用例中的所有 <code>RemovalService</code> 实例的 <code>rm</code> 方法。这意味着我们可以检查实例本身。如果你想要了解更多，可以试着在你模拟的代码下断点，以对这种修补机制的原理获得更好的认识。</p>
+<h5 id="陷阱：装饰顺序"><a href="#陷阱：装饰顺序" class="headerlink" title="陷阱：装饰顺序"></a><a href="#陷阱装饰顺序"></a>陷阱：装饰顺序</h5><p>当我们在测试方法中使用多个装饰器，其顺序是很重要的，并且很容易混乱。基本上，当装饰器被映射到方法参数时，<a href="http://www.voidspace.org.uk/python/mock/patch.html#nesting-patch-decorators" target="_blank" rel="external nofollow noopener noreferrer">装饰器的工作顺序是反向的</a>。思考这个例子：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">@mock.patch(&#39;mymodule.sys&#39;)</span><br><span class="line">@mock.patch(&#39;mymodule.os&#39;)</span><br><span class="line">@mock.patch(&#39;mymodule.os.path&#39;)</span><br><span class="line">def test_something(self, mock_os_path, mock_os, mock_sys):</span><br><span class="line">    pass</span><br></pre></td></tr></table></figure>
+
+<p>注意到我们的参数和装饰器的顺序是反向匹配了吗？这部分是由 <a href="http://docs.python.org/2/reference/compound_stmts.html#function-definitions" target="_blank" rel="external nofollow noopener noreferrer">Python 的工作方式</a>所导致的。这里是使用多个装饰器的情况下它们执行顺序的伪代码：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">patch_sys(patch_os(patch_os_path(test_something)))</span><br></pre></td></tr></table></figure>
+
+<p>因为 <code>sys</code> 补丁位于最外层，所以它最晚执行，使得它成为实际测试方法参数的最后一个参数。请特别注意这一点，并且在运行你的测试用例时，使用调试器来保证正确的参数以正确的顺序注入。</p>
+<h5 id="方法-2：创建-Mock-实例"><a href="#方法-2：创建-Mock-实例" class="headerlink" title="方法 2：创建 Mock 实例"></a><a href="#方法-2创建-mock-实例"></a>方法 2：创建 Mock 实例</h5><p>我们可以使用构造函数为 <code>UploadService</code> 提供一个 Mock 实例，而不是模拟特定的实例方法。我更推荐方法 1，因为它更加精确，但在多数情况，方法 2 或许更加有效和必要。让我们再次重构测试用例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">from mymodule import RemovalService, UploadService</span><br><span class="line"></span><br><span class="line">import mock</span><br><span class="line">import unittest</span><br><span class="line"></span><br><span class="line">class RemovalServiceTestCase(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    @mock.patch(&#39;mymodule.os.path&#39;)</span><br><span class="line">    @mock.patch(&#39;mymodule.os&#39;)</span><br><span class="line">    def test_rm(self, mock_os, mock_path):</span><br><span class="line">        </span><br><span class="line">        reference &#x3D; RemovalService()</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        mock_path.isfile.return_value &#x3D; False</span><br><span class="line"></span><br><span class="line">        reference.rm(&quot;any path&quot;)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        self.assertFalse(mock_os.remove.called, &quot;Failed to not remove the file if not present.&quot;)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        mock_path.isfile.return_value &#x3D; True</span><br><span class="line"></span><br><span class="line">        reference.rm(&quot;any path&quot;)</span><br><span class="line"></span><br><span class="line">        mock_os.remove.assert_called_with(&quot;any path&quot;)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class UploadServiceTestCase(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    def test_upload_complete(self, mock_rm):</span><br><span class="line">        </span><br><span class="line">        mock_removal_service &#x3D; mock.create_autospec(RemovalService)</span><br><span class="line">        reference &#x3D; UploadService(mock_removal_service)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        reference.upload_complete(&quot;my uploaded file&quot;)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        mock_removal_service.rm.assert_called_with(&quot;my uploaded file&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>在这个例子中，我们甚至不需要修补任何功能，只需为 <code>RemovalService</code> 类创建一个 auto-spec，然后将实例注入到我们的 <code>UploadService</code> 以验证功能。</p>
+<p><code>mock.create_autospec</code> 方法为类提供了一个同等功能实例。实际上来说，这意味着在使用返回的实例进行交互的时候，如果使用了非法的方式将会引发异常。更具体地说，如果一个方法被调用时的参数数目不正确，将引发一个异常。这对于重构来说是非常重要。当一个库发生变化的时候，中断测试正是所期望的。如果不使用 auto-spec，尽管底层的实现已经被破坏，我们的测试仍然会通过。</p>
+<h5 id="陷阱：mock-Mock-和-mock-MagicMock-类"><a href="#陷阱：mock-Mock-和-mock-MagicMock-类" class="headerlink" title="陷阱：mock.Mock 和 mock.MagicMock 类"></a><a href="#陷阱mockmock-和-mockmagicmock-类"></a>陷阱：mock.Mock 和 mock.MagicMock 类</h5><p><code>mock</code> 库包含了两个重要的类 <a href="http://www.voidspace.org.uk/python/mock/mock.html" target="_blank" rel="external nofollow noopener noreferrer">mock.Mock</a> 和 <a href="http://www.voidspace.org.uk/python/mock/magicmock.html#magic-mock" target="_blank" rel="external nofollow noopener noreferrer">mock.MagicMock</a>，大多数内部函数都是建立在这两个类之上的。当在选择使用 <code>mock.Mock</code> 实例、<code>mock.MagicMock</code> 实例还是 auto-spec 的时候，通常倾向于选择使用 auto-spec，因为对于未来的变化，它更能保持测试的健全。这是因为 <code>mock.Mock</code> 和 <code>mock.MagicMock</code> 会无视底层的 API，接受所有的方法调用和属性赋值。比如下面这个用例：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Target(object):</span><br><span class="line">    def apply(value):</span><br><span class="line">        return value</span><br><span class="line"></span><br><span class="line">def method(target, value):</span><br><span class="line">    return target.apply(value)</span><br></pre></td></tr></table></figure>
+
+<p>我们可以像下面这样使用 mock.Mock 实例进行测试：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">class MethodTestCase(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    def test_method(self):</span><br><span class="line">        target &#x3D; mock.Mock()</span><br><span class="line"></span><br><span class="line">        method(target, &quot;value&quot;)</span><br><span class="line"></span><br><span class="line">        target.apply.assert_called_with(&quot;value&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>这个逻辑看似合理，但如果我们修改 <code>Target.apply</code> 方法接受更多参数：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">class Target(object):</span><br><span class="line">    def apply(value, are_you_sure):</span><br><span class="line">        if are_you_sure:</span><br><span class="line">            return value</span><br><span class="line">        else:</span><br><span class="line">            return None</span><br></pre></td></tr></table></figure>
+
+<p>重新运行你的测试，你会发现它仍能通过。这是因为它不是针对你的 API 创建的。这就是为什么你总是应该使用 <code>create_autospec</code> 方法，并且在使用 <code>@patch</code>和 [<code>@patch.object](mailto:%60@patch.object)</code>装饰方法时使用<code>autospec</code> 参数。</p>
+<h3 id="现实例子：模拟-Facebook-API-调用"><a href="#现实例子：模拟-Facebook-API-调用" class="headerlink" title="现实例子：模拟 Facebook API 调用"></a><a href="#现实例子模拟-facebook-api-调用"></a>现实例子：模拟 Facebook API 调用</h3><p>作为这篇文章的结束，我们写一个更加适用的现实例子，一个在介绍中提及的功能：发布消息到 Facebook。我将写一个不错的包装类及其对应的测试用例。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">import facebook</span><br><span class="line"></span><br><span class="line">class SimpleFacebook(object):</span><br><span class="line"></span><br><span class="line">    def __init__(self, oauth_token):</span><br><span class="line">        self.graph &#x3D; facebook.GraphAPI(oauth_token)</span><br><span class="line"></span><br><span class="line">    def post_message(self, message):</span><br><span class="line">        &quot;&quot;&quot;Posts a message to the Facebook wall.&quot;&quot;&quot;</span><br><span class="line">        self.graph.put_object(&quot;me&quot;, &quot;feed&quot;, message&#x3D;message)</span><br></pre></td></tr></table></figure>
+
+<p>这是我们的测试用例，它可以检查我们发布的消息, 而不是真正地发布消息：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">import facebook</span><br><span class="line">import simple_facebook</span><br><span class="line">import mock</span><br><span class="line">import unittest</span><br><span class="line"></span><br><span class="line">class SimpleFacebookTestCase(unittest.TestCase):</span><br><span class="line"></span><br><span class="line">    @mock.patch.object(facebook.GraphAPI, &#39;put_object&#39;, autospec&#x3D;True)</span><br><span class="line">    def test_post_message(self, mock_put_object):</span><br><span class="line">        sf &#x3D; simple_facebook.SimpleFacebook(&quot;fake oauth token&quot;)</span><br><span class="line">        sf.post_message(&quot;Hello World!&quot;)</span><br><span class="line"></span><br><span class="line">        </span><br><span class="line">        mock_put_object.assert_called_with(message&#x3D;&quot;Hello World!&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>正如我们所看到的，在 Python 中，通过 mock，我们可以非常容易地动手写一个更加智能的测试用例。</p>
+<h3 id="Python-Mock-总结"><a href="#Python-Mock-总结" class="headerlink" title="Python Mock 总结"></a><a href="#python-mock-总结"></a>Python Mock 总结</h3><p>即使对它的使用还有点不太熟悉，对<a href="http://www.toptal.com/qa/how-to-write-testable-code-and-why-it-matters" target="_blank" rel="external nofollow noopener noreferrer">单元测试</a>来说，Python 的 <code>mock</code> 库可以说是一个规则改变者。我们已经演示了常见的用例来了解了 <code>mock</code> 在单元测试中的使用，希望这篇文章能够帮助 <a href="http://www.toptal.com/python" target="_blank" rel="external nofollow noopener noreferrer">Python 开发者</a>克服初期的障碍，写出优秀、经受过考验的代码。</p>
+<p>via: <a href="https://www.toptal.com/python/an-introduction-to-mocking-in-python" target="_blank" rel="external nofollow noopener noreferrer">https://www.toptal.com/python/an-introduction-to-mocking-in-python</a></p>
+<p>作者：<a href="http://www.slviki.com/" target="_blank" rel="external nofollow noopener noreferrer">NAFTULI TZVI KAY</a> 译者：<a href="https://github.com/cposture" target="_blank" rel="external nofollow noopener noreferrer">cposture</a> 校对：<a href="https://github.com/wxy" target="_blank" rel="external nofollow noopener noreferrer">wxy</a></p>
+<p>本文由 <a href="https://github.com/LCTT/TranslateProject" target="_blank" rel="external nofollow noopener noreferrer">LCTT</a> 原创翻译，<a href="https://linux.cn/" target="_blank" rel="external nofollow noopener noreferrer">Linux 中国</a> 荣誉推出</p>
+
+    </div>
+
+    
+    
+    
+      
+
+        <div class="reward-container">
+  <div>打赏一杯咖啡</div>
+  <button disable="enable" onclick="var qr = document.getElementById(&quot;qr&quot;); qr.style.display = (qr.style.display === 'none') ? 'block' : 'none';">
+    打赏
+  </button>
+  <div id="qr" style="display: none;">
+      
+      <div style="display: inline-block;">
+        <img src="/images/wechatpay.jpg" alt="vissssa 微信支付">
+        <p>微信支付</p>
+      </div>
+      
+      <div style="display: inline-block;">
+        <img src="/images/alipay.jpg" alt="vissssa 支付宝">
+        <p>支付宝</p>
+      </div>
+
+  </div>
+</div>
+
+        
+
+<div>
+<ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者： </strong>vissssa
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://vissssa.club/posts/a667b194/" title="mock与单元测试">http://vissssa.club/posts/a667b194/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/en" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-creative-commons"></i>BY-NC-SA</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+</div>
+
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/test/" rel="tag"># test</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/posts/ce9335e0/" rel="prev" title="google和github的搜索技巧">
+      <i class="fa fa-chevron-left"></i> google和github的搜索技巧
+    </a></div>
+      <div class="post-nav-item"></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="gitalk-container"></div>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#如何执行单元测试而不用考验你的耐心"><span class="nav-number">1.</span> <span class="nav-text">如何执行单元测试而不用考验你的耐心</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#恐惧系统调用"><span class="nav-number">2.</span> <span class="nav-text">恐惧系统调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一个简单的删除函数"><span class="nav-number">3.</span> <span class="nav-text">一个简单的删除函数</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#使用-Mock-重构"><span class="nav-number">3.1.</span> <span class="nav-text">使用 Mock 重构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#潜在陷阱"><span class="nav-number">3.1.1.</span> <span class="nav-text">潜在陷阱</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#向-‘rm’-中加入验证"><span class="nav-number">3.2.</span> <span class="nav-text">向 ‘rm’ 中加入验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#将文件删除作为服务"><span class="nav-number">3.3.</span> <span class="nav-text">将文件删除作为服务</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#方法-1：模拟实例的方法"><span class="nav-number">3.3.1.</span> <span class="nav-text">方法 1：模拟实例的方法</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#陷阱：装饰顺序"><span class="nav-number">3.3.2.</span> <span class="nav-text">陷阱：装饰顺序</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#方法-2：创建-Mock-实例"><span class="nav-number">3.3.3.</span> <span class="nav-text">方法 2：创建 Mock 实例</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#陷阱：mock-Mock-和-mock-MagicMock-类"><span class="nav-number">3.3.4.</span> <span class="nav-text">陷阱：mock.Mock 和 mock.MagicMock 类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#现实例子：模拟-Facebook-API-调用"><span class="nav-number">4.</span> <span class="nav-text">现实例子：模拟 Facebook API 调用</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python-Mock-总结"><span class="nav-number">5.</span> <span class="nav-text">Python Mock 总结</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <a href="/about/">
+    <img class="site-author-image" itemprop="image" alt="vissssa" src="https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/%E5%A4%B4%E5%83%8F%E5%8E%8B%E7%BC%A9%E7%89%88.jpg">
+  </a>
+  <p class="site-author-name" itemprop="name">vissssa</p>
+  <div class="site-description" itemprop="description">python, flask, linux, 架构, 生活, 科技</div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">34</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">9</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">35</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/vissssa" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;vissssa" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:vissssa@163.com" title="E-Mail → mailto:vissssa@163.com" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-envelope"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://weibo.com/vissssa" title="Weibo → https:&#x2F;&#x2F;weibo.com&#x2F;vissssa" rel="external nofollow noopener noreferrer" target="_blank"><i class="fa fa-fw fa-weibo"></i>Weibo</a>
+      </span>
+  </div>
+  <div class="cc-license motion-element" itemprop="license">
+    <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/en" class="cc-opacity" rel="external nofollow noopener noreferrer" target="_blank"><img src="/images/cc-by-nc-sa.svg" alt="Creative Commons"></a>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+  <div class="beian"><a href="http://www.beian.miit.gov.cn/" rel="external nofollow noopener noreferrer" target="_blank">皖ICP备18020261号 </a>
+      <img src="https://vissssa-imgs-1252712312.cos.ap-shanghai.myqcloud.com/hexo/%E5%A4%87%E6%A1%88%E5%9B%BE%E6%A0%87.png" style="display: inline-block;"><a href="http://www.beian.gov.cn/portal/registerSystemInfo?recordcode=%E7%9A%96ICP%E5%A4%8718020261%E5%8F%B7" rel="external nofollow noopener noreferrer" target="_blank">1 </a>
+  </div>
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2020</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">vissssa</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    <span title="站点总字数">222k</span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    <span title="站点阅读时长">6:09</span>
+</div>
+  <div class="powered-by">由 <a href="https://hexo.io/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">Hexo</a> 强力驱动 v4.2.0
+  </div>
+  <span class="post-meta-divider">|</span>
+  <div class="theme-info">主题 – <a href="https://theme-next.org/" class="theme-link" rel="external nofollow noopener noreferrer" target="_blank">NexT.Gemini</a> v7.5.0
+  </div>
+
+<div>
+<span id="timeDate">载入天数...</span><span id="times">载入时分秒...</span>
+<script>
+    var now = new Date();
+    function createtime() {
+        var grt= new Date("11/06/2019 00:00:00");
+        now.setTime(now.getTime()+250);
+        days = (now - grt ) / 1000 / 60 / 60 / 24; dnum = Math.floor(days);
+        hours = (now - grt ) / 1000 / 60 / 60 - (24 * dnum); hnum = Math.floor(hours);
+        if(String(hnum).length ==1 ){hnum = "0" + hnum;} minutes = (now - grt ) / 1000 /60 - (24 * 60 * dnum) - (60 * hnum);
+        mnum = Math.floor(minutes); if(String(mnum).length ==1 ){mnum = "0" + mnum;}
+        seconds = (now - grt ) / 1000 - (24 * 60 * 60 * dnum) - (60 * 60 * hnum) - (60 * mnum);
+        snum = Math.round(seconds); if(String(snum).length ==1 ){snum = "0" + snum;}
+        document.getElementById("timeDate").innerHTML = "本站已安全运行 "+dnum+" 天 ";
+        document.getElementById("times").innerHTML = hnum + " 小时 " + mnum + " 分 " + snum + " 秒";
+    }
+setInterval("createtime()",250);
+</script>
+</div>
+
+        
+<div class="busuanzi-count">
+  <script pjax async src="https://busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+    <span class="post-meta-item" id="busuanzi_container_site_uv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-user"></i>
+      </span>
+      <span class="site-uv" title="总访客量">
+        <span id="busuanzi_value_site_uv"></span>
+      </span>
+    </span>
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item" id="busuanzi_container_site_pv" style="display: none;">
+      <span class="post-meta-item-icon">
+        <i class="fa fa-eye"></i>
+      </span>
+      <span class="site-pv" title="总访问量">
+        <span id="busuanzi_value_site_pv"></span>
+      </span>
+    </span>
+</div>
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/theme-next/theme-next-pjax@0/pjax.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/lozad@1/dist/lozad.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/pangu@4/dist/browser/pangu.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/pisces.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+  <script>
+var pjax = new Pjax({
+  selectors: [
+    'head title',
+    '#page-configurations',
+    '.content-wrap',
+    '.post-toc-wrap',
+    '#pjax'
+  ],
+  switches: {
+    '.post-toc-wrap': Pjax.switches.innerHTML
+  },
+  analytics: false,
+  cacheBust: false,
+  scrollTo : !CONFIG.bookmark.enable
+});
+
+window.addEventListener('pjax:success', () => {
+  document.querySelectorAll('script[pjax], script#page-configurations, #pjax script').forEach(element => {
+    var code = element.text || element.textContent || element.innerHTML || '';
+    var parent = element.parentNode;
+    parent.removeChild(element);
+    var script = document.createElement('script');
+    if (element.id) {
+      script.id = element.id;
+    }
+    if (element.className) {
+      script.className = element.className;
+    }
+    if (element.type) {
+      script.type = element.type;
+    }
+    if (element.src) {
+      script.src = element.src;
+      // Force synchronous loading of peripheral JS.
+      script.async = false;
+    }
+    if (element.getAttribute('pjax') !== null) {
+      element.setAttribute('pjax', '');
+    }
+    if (code !== '') {
+      script.appendChild(document.createTextNode(code));
+    }
+    parent.appendChild(script);
+  });
+  NexT.boot.refresh();
+  // Define Motion Sequence & Bootstrap Motion.
+  if (CONFIG.motion.enable) {
+    NexT.motion.integrator
+      .init()
+      .add(NexT.motion.middleWares.postList)
+      .bootstrap();
+  }
+  NexT.utils.updateSidebarPosition();
+});
+</script>
+
+
+
+
+  
+  <script pjax>
+    (function(){
+      var bp = document.createElement('script');
+      var curProtocol = window.location.protocol.split(':')[0];
+      bp.src = (curProtocol === 'https') ? 'https://zz.bdstatic.com/linksubmit/push.js' : 'http://push.zhanzhang.baidu.com/push.js';
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(bp, s);
+    })();
+  </script>
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+    <div id="pjax">
+
+  
+
+  
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js', () => {
+    var gitalk = new Gitalk({
+      clientID: '1cb5d474d77189d86ba0',
+      clientSecret: '568f0c839b99394f56a213db8d26afbb12e3dad1',
+      repo: 'vissssa',
+      owner: 'vissssa',
+      admin: ['vissssa'],
+      id: 'ef0d3a2ac7441b211a20d98daf2d2c2e',
+        language: 'zh-CN',
+      distractionFreeMode: 'true'
+    });
+    gitalk.render('gitalk-container');
+  }, window.Gitalk);
+</script>
+
+    </div>
+</body>
+</html>
