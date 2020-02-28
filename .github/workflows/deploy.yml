@@ -1,0 +1,50 @@
+name: Deploy Blog
+
+on: 
+  push:
+    branches: 
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - name: Checkout source
+      uses: actions/checkout@v2
+      with:
+        path: main
+    - name: Setup node and yarn
+      uses: actions/setup-node@v1
+      with:
+        node-version: 13.x
+    - name: Install hexo dependencies
+      run: |
+        cd main
+        yarn
+        npm i -g hexo-cli 
+    - name: Generate blog
+      env:
+        TZ: Asia/Shanghai
+      run: |
+        cd main
+        hexo clean
+        hexo generate
+        ls
+    - name: Checkout gh-pages
+      uses: actions/checkout@v2
+      with:
+        path: gh-pages-pre
+        ref: gh-pages
+        fetch-depth: 0
+    - name: Publish to gh-pages
+      env:
+        TZ: Asia/Shanghai
+      run: |
+        mv main/public gh-pages
+        cp -r gh-pages-pre/.git gh-pages/
+        cd gh-pages
+        git config --local user.email "zhangyu18223@gmail.com"
+        git config --local user.name "vissssa"
+        git add .
+        git commit -m "Auto Delopy at `date +"%Y-%m-%d %H:%M"`"
+        git push origin gh-pages
