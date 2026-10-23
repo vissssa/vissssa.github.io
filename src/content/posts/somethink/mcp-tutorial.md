@@ -1,12 +1,10 @@
 ---
 title: MCP 完全指南
 published: 2026-10-22
-category: 教程
-tags:
-- MCP
-- AI Agent
-- 协议
 description: 面向中高级 AI Agent 开发工程师的 MCP 深度教程。
+tags: [MCP, AI Agent, 协议]
+category: 教程
+draft: false
 ---
 
 ## 01 MCP 到底解决什么问题

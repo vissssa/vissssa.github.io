@@ -99,9 +99,10 @@ front = (
     "---\n"
     "title: MCP 完全指南\n"
     "published: 2026-10-22\n"
-    "category: 教程\n"
-    "tags:\n- MCP\n- AI Agent\n- 协议\n"
     "description: 面向中高级 AI Agent 开发工程师的 MCP 深度教程。\n"
+    "tags: [MCP, AI Agent, 协议]\n"
+    "category: 教程\n"
+    "draft: false\n"
     "---\n\n"
 )
 
