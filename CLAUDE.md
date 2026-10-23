@@ -1,13 +1,14 @@
 # 项目约定
 
-Fuwari（Astro）博客。文章在 `src/content/posts/<分类目录>/`，URL 由文件路径生成（全小写），不使用 `slug`。
+Fuwari（Astro）博客。文章在 `src/content/posts/<分类目录>/`，每篇都必须写 `slug`，URL 为 `/posts/<slug>/`（周刊如 `2026W43`），文章之间的链接也用这个格式。
 
 ## Frontmatter
 
-按 Fuwari 文档的字段和顺序，标签用行内数组，不加 `slug`：
+按 Fuwari 文档的字段和顺序，标签用行内数组，`slug` 放第一行：
 
 ```yaml
 ---
+slug: "2026W43"
 title: 标题
 published: 2026-10-22
 description: ''
@@ -18,7 +19,7 @@ draft: false
 ---
 ```
 
-`pnpm new-post <路径>` 可以生成模板。
+`pnpm new-post <路径>` 可以生成模板（不含 `slug`，需手动补上，且不能与其他文章重复）。
 
 ## 新增 HTML 文件
 

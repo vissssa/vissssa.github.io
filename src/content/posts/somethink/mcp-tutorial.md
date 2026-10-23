@@ -1,4 +1,5 @@
 ---
+slug: "mcp-tutorial"
 title: MCP 完全指南
 published: 2026-10-22
 description: 面向中高级 AI Agent 开发工程师的 MCP 深度教程。
