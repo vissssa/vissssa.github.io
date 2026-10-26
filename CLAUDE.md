@@ -37,6 +37,20 @@ draft: false
 
 之前用过的转换脚本（`scripts/html_to_fuwari_md.py`）已经删除，需要参考时用 `git log --diff-filter=D -- scripts/html_to_fuwari_md.py` 找到提交，再 `git show <提交>^:scripts/html_to_fuwari_md.py` 查看。
 
+## 同步 Obsidian 面试训练文章
+
+`src/content/posts/agent-interview/<YYYY-MM>/` 是 Obsidian vault 里 `Plan/better/<YYYY-MM>/` 的副本，源头在 vault（那边也是一个 git 仓库，不能移动目录，也不要用软链，线上构建读不到）。定期在仓库根目录执行，只同步日期目录下的 `.md`，README、题库配置、题目索引、prompts、精选都不同步：
+
+```bash
+SRC="$HOME/Library/Mobile Documents/iCloud~md~obsidian/Documents/Obsidian Vault/Plan/better"
+rsync -a --include='20[0-9][0-9]-[0-9][0-9]/' --include='20[0-9][0-9]-[0-9][0-9]/*.md' --exclude='*' "$SRC/" src/content/posts/agent-interview/
+```
+
+- 单向 vault → 仓库，不带 `--delete`；vault 里删掉的文章，要手动删仓库里的副本。
+- 不要直接改仓库里的副本，改动会在下次同步时被覆盖。
+- 文章必须在 vault 里写好 `slug`、`title`、`published`（slug 格式 `ai-agent-interview-YYYY-MM-DD`），缺字段会让构建失败。
+- 先加 `-n` 看一遍会同步哪些文件，再正式执行。
+
 ## 本地预览
 
 `pnpm dev`，默认 http://127.0.0.1:4321/。
