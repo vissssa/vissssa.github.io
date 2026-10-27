@@ -42,6 +42,8 @@ export const siteConfig: SiteConfig = {
 export const navBarConfig: NavBarConfig = {
 	links: [
 		LinkPreset.Home,
+		{ name: "周刊", url: "/weekly/" },
+		{ name: "AI Agent", url: "/ai-agent/" },
 		LinkPreset.Archive,
 		LinkPreset.About,
 		{

@@ -1,0 +1,34 @@
+---
+import type { GetStaticPaths } from "astro";
+import Pagination from "../../components/control/Pagination.astro";
+import PostPage from "../../components/PostPage.astro";
+import { PAGE_SIZE } from "../../constants/constants";
+import MainGridLayout from "../../layouts/MainGridLayout.astro";
+import { getSortedPosts } from "../../utils/content-utils";
+
+// 按分类单独分页的列表页，展示形式与主页一致
+export const getStaticPaths = (async ({ paginate }) => {
+	// getStaticPaths 在独立作用域执行，配置只能写在这里面
+	const sections = [
+		{ section: "weekly", category: "周刊", title: "周刊" },
+		{ section: "ai-agent", category: "AI Agent 面试训练", title: "AI Agent" },
+	];
+	const allBlogPosts = await getSortedPosts();
+	return sections.flatMap(({ section, category, title }) =>
+		paginate(
+			allBlogPosts.filter((post) => post.data.category === category),
+			{ pageSize: PAGE_SIZE, params: { section }, props: { title } },
+		),
+	);
+}) satisfies GetStaticPaths;
+
+const { page, title } = Astro.props;
+const { section } = Astro.params;
+
+const len = page.data.length;
+---
+
+<MainGridLayout title={title}>
+    <PostPage page={page}></PostPage>
+    <Pagination class="mx-auto onload-animation" page={page} base={`/${section}/`} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
+</MainGridLayout>
