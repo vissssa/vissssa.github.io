@@ -1,0 +1,44 @@
+---
+// 没有 image 的文章用标题生成封面：浅灰底，日期放大蓝字，其余作上方小字
+interface Props {
+	title: string;
+	class?: string;
+}
+const { title, class: className } = Astro.props;
+const m = title.match(/^(\d{4}-\d{2}-\d{2})\s+(.+)$/);
+const [sub, main] = m ? [m[2], m[1]] : ["", title];
+---
+<div class:list={["title-cover", className]}>
+    {sub && <div class="sub">{sub}</div>}
+    <div class:list={["main", { long: !m }]}>{main}</div>
+</div>
+
+<style>
+    /* 容器自身的 padding/gap 不能用 cqw（会按视口算），间距都放子元素上 */
+    .title-cover {
+        container-type: inline-size;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background: #f6f8fb;
+        text-align: center;
+        font-weight: 700;
+        line-height: 1.1;
+    }
+    .sub {
+        color: #16181d;
+        font-size: 4cqw;
+        letter-spacing: 0.15em;
+        margin-bottom: 4cqw;
+    }
+    .main {
+        color: #2563d9;
+        font-size: 11cqw;
+        letter-spacing: 0.04em;
+        padding: 0 6cqw;
+    }
+    .main.long {
+        font-size: 8cqw;
+    }
+</style>
