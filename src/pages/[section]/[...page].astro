@@ -14,21 +14,25 @@ export const getStaticPaths = (async ({ paginate }) => {
 		{ section: "ai-agent", category: "AI Agent 面试训练", title: "AI Agent" },
 	];
 	const allBlogPosts = await getSortedPosts();
-	return sections.flatMap(({ section, category, title }) =>
-		paginate(
-			allBlogPosts.filter((post) => post.data.category === category),
-			{ pageSize: PAGE_SIZE, params: { section }, props: { title } },
-		),
-	);
+	return sections.flatMap(({ section, category, title }) => {
+		const posts = allBlogPosts.filter((post) => post.data.category === category);
+		// 侧边栏只显示本栏目的分类和标签
+		const tags = [...new Set(posts.flatMap((post) => post.data.tags))];
+		return paginate(posts, {
+			pageSize: PAGE_SIZE,
+			params: { section },
+			props: { title, category, tags },
+		});
+	});
 }) satisfies GetStaticPaths;
 
-const { page, title } = Astro.props;
+const { page, title, category, tags } = Astro.props;
 const { section } = Astro.params;
 
 const len = page.data.length;
 ---
 
-<MainGridLayout title={title}>
+<MainGridLayout title={title} category={category} tags={tags}>
     <PostPage page={page}></PostPage>
     <Pagination class="mx-auto onload-animation" page={page} base={`/${section}/`} style={`animation-delay: calc(var(--content-delay) + ${(len)*50}ms)`}></Pagination>
 </MainGridLayout>
