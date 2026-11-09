@@ -2,6 +2,10 @@
 
 Fuwari（Astro）博客。文章在 `src/content/posts/<分类目录>/`，每篇都必须写 `slug`，URL 为 `/posts/<slug>/`（周刊如 `2026W43`），文章之间的链接也用这个格式。
 
+## 提交与推送
+
+远端是 GitHub，不走 Gerrit：直接 `git push origin main`，不用 `refs/for/<分支>`，commit message 也不需要 iCafe 卡片号。这条覆盖全局 CLAUDE.md 里的 Gerrit 约定。
+
 ## Frontmatter
 
 按 Fuwari 文档的字段和顺序，标签用行内数组，`slug` 放第一行：
@@ -36,6 +40,10 @@ draft: false
 - 30 字以内，一句话，口吻贴近正文；不重复标题里的日期和周数。
 - 优先写生活和片段里的事，字数还有余量再带一两条新闻。
 - 用单引号包住，如 `description: '换小佩猫砂盆 MAX2，打卡寿司郎'`。
+
+## 周刊栏目标题
+
+周刊固定五个栏目标题，按顺序：`## 🎞️ 生活`、`## 💭 片段`、`## 📰 周刊摘录`、`## 📚 文章`、`## 📜 周刊历史上的本周`。栏目没内容也保留标题，不要删。
 
 ## 新增 HTML 文件
 
